@@ -1,0 +1,238 @@
+{
+	"settings": {
+		"nologo" : false,
+		"startAction": "",
+		"startMenu": "MainMenu",
+		"option" : {
+			"pattern": "{0}: {1}",
+			"padLeft": 2,
+			"padRight": 0
+		},
+		"menuType": "console",
+		"confirmation": {
+			"question": "Do we continue?",
+			"continue": {
+				"label": "&Ok, if you insist",
+				"help": "Click 'O' to continue"
+			},
+			"cancel": {
+				"label": "&Mwaahhhhh",
+				"help": "Click 'M' to cancel"
+			}
+		},
+		"selection": {
+			"promptForChoice": "Place your bets",
+			"promptForAnykey": "keep pushing"
+		}
+	},
+	"menus": [
+		{
+			"id": "MainMenu",
+			"cls": true,
+			"header": [
+				"This is the main menu",
+				"The main menu has $($jsonMenuContext.Menus.MainMenu.Options.Length) options",
+				"The option '$($jsonMenuContext.Menus.MainMenu.Options[3].Value)' does not work",
+				"========================================================"
+			],
+			"options": [
+				{
+					"id": "1",
+					"value": "Submenu",
+					"type": "menu",
+					"action": "menu1"
+				},
+				{
+					"id": "2",
+					"value": "execute script method",
+					"type": "action",
+					"action": "execute-script-method"
+				},
+				{
+					"id": "3",
+					"value": "load script, execute method",
+					"type": "action",
+					"action": "load-script-execute-method"
+				},
+				{
+					"id": "4",
+					"value": "load module, execute method",
+					"type": "action",
+					"action": "load-module-execute-method"
+				},
+				{
+					"id": "5",
+					"value": "execute local method",
+					"type": "action",
+					"action": "execute-local-method"
+				},
+				{
+					"id": "q",
+					"value": "Exit the menu",
+					"type": "exit"
+				}
+			],
+			"selection": {}
+		},
+		{
+			"cls": true,
+			"id": "menu1",
+			"header": "Submenu 1",
+			"options": [
+				{
+					"id": "11",
+					"value": "Submenu 2",
+					"type": "menu",
+					"action": "menu2"
+				},
+				{
+					"id": "b",
+					"value": "Exit the menu",
+					"type": "exit"
+				}
+			],
+			"selection": {
+				"prompt": "Make your choice. Click [b] to go back"
+			}
+		},
+		{
+			"id": "menu2",
+			"cls": true,
+			"header": [],
+			"options": [
+				{
+					"id": "b",
+					"value": "Exit the menu",
+					"type": "exit"
+				}
+			],
+			"selection": {
+				"prompt": ""
+			}
+		}
+	],
+	"actions": [
+		{
+			"id": "load-module-execute-method",
+			"begin": {
+				"cls": true,
+				"header": "Write Color",
+				"confirmation" : {
+					"question": "Do you want to continue?",
+					"continue": {
+						"label": "&Yes",
+						"help": "Click 'Y' to continue"
+					},
+					"cancel": {
+						"label": "&No",
+						"help": "Click 'N' to cancel"
+					}
+				}
+			},
+			"invoke": {
+				"cls": true,
+				"module": {
+					"name": "PSWriteColor",
+					"parameters": {}
+				},
+				"method": {
+					"name": "Write-Color",
+					"parameters": {
+						"Text": ["Green", "Yellow", "Red"],
+						"Color": ["Red","Green","Yellow"]
+					}
+				}
+			},
+			"end": {
+				"cls": false,
+				"header": "Action '$($jsonMenuContext.ActionContext.Name)' is finished",
+				"selection": {
+					"prompt": "Press any key to continue",
+					"anykey": true
+				}
+			}
+		},
+		{
+			"id": "execute-local-method",
+			"begin": {
+				"confirmation" : {},
+				"cls": true
+			},
+			"invoke": {
+				"cls": true,
+				"method": {
+					"name": "JsonMenu.UserInteraction.WriteHeader",
+					"parameters": {
+						"Header": [
+							"Hello",
+							"World",
+							"How are you today?"
+						],
+						"AddLinebreakBefore": true
+					}
+				}
+			},
+			"end": {
+				"cls": false,
+				"header": [
+					"=============================== Summary ====================================",
+					"{ if ( $jsonMenuContext.ActionContext.Success ) { Write-Output 'The action is succesfully executed' } else { Write-Output 'The action failed' } }",
+					"It took $([math]::Round($jsonMenuContext.ActionContext.Stopwatch.Elapsed.TotalSeconds)) seconds to execute the action '$($jsonMenuContext.ActionContext.Name)'",
+					"=============================================================================="
+				],
+				"selection": {
+					"anykey": true
+				}
+			}
+		},
+		{
+			"id": "execute-script-method",
+			"name": "executing a script method from a file",
+			"invoke": {
+				"cls": true,
+				"method": {
+					"name": "D:\\Code\\JsonMenuProject_202108\\Examples\\HelloWorld.ps1",
+					"parameters": {
+						"Name": "Jane Doe"
+					}
+				}
+			},
+			"end": {
+				"cls": false,
+				"header": [
+					"=============================== Summary ====================================",
+					"{ if ( $jsonMenuContext.ActionContext.Success ) { Write-Output 'The action is succesfully executed' } else { Write-Output 'The action failed' } }",
+					"It took $([math]::Round($jsonMenuContext.ActionContext.Stopwatch.Elapsed.TotalSeconds)) seconds to execute the action '$($jsonMenuContext.ActionContext.Name)'",
+					"=============================================================================="
+				],
+				"selection": {
+					"prompt": "Press any key to continue",
+					"anykey": true
+				}
+			}
+		},
+		{
+			"id": "load-script-execute-method",
+			"invoke": {
+				"cls": true,
+				"module": {
+					"name": "D:\\Code\\JsonMenuProject_202108\\Examples\\HelloMoon.ps1"
+				},
+				"method": {
+					"name": "Write-HelloMoon",
+					"parameters": {
+						"Name": "Jane Doe"
+					}
+				}
+			},
+			"end": {
+				"cls": false,
+				"header": "Action $($jsonMenuContext.ActionContext.Name) is finished",
+				"selection": {
+					"anykey": true
+				}
+			}
+		}
+	],
+	"Texts": []
+}
