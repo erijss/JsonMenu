@@ -1,4 +1,4 @@
-function JsonMenu.Functions.ConvertToHashtable {
+function JsonMenu.Functions.ConvertToHashtableOld {
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]

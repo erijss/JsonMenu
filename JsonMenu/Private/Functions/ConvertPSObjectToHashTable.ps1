@@ -33,31 +33,55 @@ function JsonMenu.Functions.ConvertPSObjectToHashtable {
         [Switch]
         $NotRecursive
     )
-    process {
-        if ( $null -eq $InputObject ) { return $null }
+    # process {
+    #     if ( $null -eq $InputObject ) { return $null }
 
-        if ( $InputObject -is [psobject] ) {
-            $result = @{}
-            $items = $InputObject | Get-Member -MemberType NoteProperty
-            foreach( $item in $items ) {
-                $key = $item.Name
-                if( $NotRecursive ) {
-                    $value = $InputObject.$key
-                }
-                else {
-                    $value = JsonMenu.Functions.ConvertPSObjectToHashtable -InputObject $InputObject.$key
-                }
-                $result.Add($key, $value)
+    #     if ( $InputObject -is [psobject] ) {
+    #         $result = @{}
+    #         $items = $InputObject | Get-Member -MemberType NoteProperty
+    #         foreach( $item in $items ) {
+    #             $key = $item.Name
+    #             if( $NotRecursive ) {
+    #                 $value = $InputObject.$key
+    #             }
+    #             else {
+    #                 $value = JsonMenu.Functions.ConvertPSObjectToHashtable -InputObject $InputObject.$key
+    #             }
+    #             $result.Add($key, $value)
+    #         }
+    #         return $result
+    #     } elseif ( $InputObject -is [array]) {
+    #         $result = $null
+    #         for ($i = 0; $i -lt $InputObject.Count; $i++) {
+    #             $result[$i] = (JsonMenu.Functions.ConvertPSObjectToHashtable -InputObject $InputObject[$i])
+    #         }
+    #         return $result
+    #     } else {
+    #         return $InputObject
+    #     }
+    # }
+    process
+    {
+        if ($null -eq $InputObject) { return $null }
+
+        if ($InputObject -is [System.Collections.IEnumerable] -and $InputObject -isnot [string])
+        {
+            foreach ($object in $InputObject) { JsonMenu.Functions.ConvertPSObjectToHashtable $object }
+        }
+        elseif ($InputObject -is [psobject])
+        {
+            $hash = @{}
+
+            foreach ($property in $InputObject.PSObject.Properties)
+            {
+                $hash[$property.Name] = JsonMenu.Functions.ConvertPSObjectToHashtable $property.Value
             }
-            return $result
-        } elseif ( $InputObject -is [array]) {
-            $result = $null
-            for ($i = 0; $i -lt $InputObject.Count; $i++) {
-                $result[$i] = (JsonMenu.Functions.ConvertPSObjectToHashtable -InputObject $InputObject[$i])
-            }
-            return $result
-        } else {
-            return $InputObject
+
+            $hash
+        }
+        else
+        {
+            $InputObject
         }
     }
 }

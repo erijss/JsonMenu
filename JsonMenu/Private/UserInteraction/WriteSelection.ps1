@@ -28,15 +28,12 @@ function JsonMenu.UserInteraction.WriteSelection {
     )
 
     process {
-        if ( -not $Selection.AnyKey -and $jsonMenuContext.Constants.Settings.ConsoleIsMinimizable ) {
+        if ( -not $Selection.AnyKey -and $jsonMenuContext.Constants.Info.ConsoleIsMinimizable ) {
             if ( $Selection.Prompt ) {
                 $prompt = $Selection.Prompt | JsonMenu.Functions.ResolveContextVariables
             }
-            elseif ( $jsonMenuContext.Settings.Selection.PromptForChoice ) {
-                $prompt =  $jsonMenuContext.Settings.Selection.PromptForChoice | JsonMenu.Functions.ResolveContextVariables
-            }
             else {
-                $prompt =  $jsonMenuContext.Constants.Selection.PromptForChoice
+                $prompt =  $jsonMenuContext.Settings.Selection.PromptForChoice | JsonMenu.Functions.ResolveContextVariables
             }
 
             if ( $AddLineBreakBefore ) {
@@ -45,15 +42,12 @@ function JsonMenu.UserInteraction.WriteSelection {
 
             return Read-Host -Prompt $prompt
         }
-        elseif ( $jsonMenuContext.Constants.Settings.ConsoleIsMinimizable ) {
+        elseif ( $jsonMenuContext.Constants.Info.ConsoleIsMinimizable ) {
             if ( $Selection.Prompt ) {
                 $prompt = $Selection.Prompt | JsonMenu.Functions.ResolveContextVariables
             }
-            elseif ( $jsonMenuContext.Settings.Selection.PromptForAnyKey ) {
-                $prompt = $jsonMenuContext.Settings.Selection.PromptForAnyKey | JsonMenu.Functions.ResolveContextVariables
-            }
             else {
-                $prompt =  $jsonMenuContext.Constants.Selection.PromptForAnyKey
+                $prompt = $jsonMenuContext.Settings.Selection.PromptForAnyKey | JsonMenu.Functions.ResolveContextVariables
             }
 
             if ( $AddLineBreakBefore ) {

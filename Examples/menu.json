@@ -1,14 +1,14 @@
 {
 	"settings": {
-		"nologo" : false,
+		"NoLogo": true,
 		"startAction": "",
 		"startMenu": "MainMenu",
+		"menuType": "console",
 		"option" : {
 			"pattern": "{0}: {1}",
 			"padLeft": 2,
 			"padRight": 0
 		},
-		"menuType": "console",
 		"confirmation": {
 			"question": "Do we continue?",
 			"continue": {
@@ -191,7 +191,7 @@
 			"invoke": {
 				"cls": true,
 				"method": {
-					"name": "D:\\Code\\JsonMenuProject_202108\\Examples\\HelloWorld.ps1",
+					"name": "$($jsonMenuContext.Constants.Settings.ModulePath)\\Demo\\DemoScript.ps1",
 					"parameters": {
 						"Name": "Jane Doe"
 					}
@@ -216,7 +216,7 @@
 			"invoke": {
 				"cls": true,
 				"module": {
-					"name": "D:\\Code\\JsonMenuProject_202108\\Examples\\HelloMoon.ps1"
+					"name": "$($jsonMenuContext.Constants.Settings.ModulePath)\\Demo\\DemoScriptWithFunction.ps1"
 				},
 				"method": {
 					"name": "Write-HelloMoon",

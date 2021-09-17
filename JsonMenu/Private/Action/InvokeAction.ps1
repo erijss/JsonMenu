@@ -82,10 +82,15 @@ function JsonMenu.Action.InvokeAction {
 
         # moduule
         if ( $Invoke.Module ) {
-            $moduleName = $Invoke.Module.Name
+            $moduleName = $Invoke.Module.Name| JsonMenu.Functions.ResolveContextVariables
 
             # resolve context variable and convert to hashtable
-            $moduleParameters = $Invoke.Module.Parameters | JsonMenu.Functions.ResolveContextVariables | JsonMenu.Functions.ConvertPSObjectToHashtable -NotRecursive
+            $moduleParameters = @{}
+            foreach ($parameter in $Invoke.Method.Parameters.PSObject.Properties)
+            {
+                $value = $parameter.Value | JsonMenu.Functions.ResolveContextVariables
+                $moduleParameters.Add($parameter.Name, $value)
+            }
 
             # load module
             if ( $null -eq $moduleParameters ) {
@@ -98,11 +103,15 @@ function JsonMenu.Action.InvokeAction {
 
         # function
         if ( $Invoke.Method) {
-            $methodName = $Invoke.Method.Name
+            $methodName = $Invoke.Method.Name | JsonMenu.Functions.ResolveContextVariables
 
             # resolve context variable and convert to hashtable
-            $methodParameters =  $Invoke.Method.Parameters | JsonMenu.Functions.ResolveContextVariables | JsonMenu.Functions.ConvertPSObjectToHashtable -NotRecursive
-            # $methodParameters =  $Invoke.Method.Parameters | JsonMenu.Functions.ResolveContextVariables | JsonMenu.Functions.ConvertToHashtable
+            $methodParameters = @{}
+            foreach ($parameter in $Invoke.Method.Parameters.PSObject.Properties)
+            {
+                $value = $parameter.Value | JsonMenu.Functions.ResolveContextVariables
+                $methodParameters.Add($parameter.Name, $value)
+            }
 
             $actionStopwatch = [System.Diagnostics.Stopwatch]::StartNew()
             $actionStopwatch.Start()
@@ -121,6 +130,7 @@ function JsonMenu.Action.InvokeAction {
                 }
             }
             catch {
+                Write-Error $_
                 $jsonMenuContext.ActionResults[$ActionId] = $false
                 $jsonMenuContext.ActionContext.Success = $false
             }

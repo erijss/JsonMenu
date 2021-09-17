@@ -45,11 +45,8 @@ function JsonMenu.UserInteraction.WriteConfirmation {
             if ( $Confirmation.Question ) {
                 $question = $Confirmation.Question | JsonMenu.Functions.ResolveContextVariables
             }
-            elseif ( $jsonMenuContext.Settings.Confirmation.Question ) {
-                $question = $jsonMenuContext.Settings.Confirmation.Question | JsonMenu.Functions.ResolveContextVariables
-            }
             else {
-                $question = $jsonMenuContext.Constants.Confirmation.Question
+                $question = $jsonMenuContext.Settings.Confirmation.Question | JsonMenu.Functions.ResolveContextVariables
             }
 
             # Get confirmation label and help
@@ -59,44 +56,21 @@ function JsonMenu.UserInteraction.WriteConfirmation {
                 if ( $Confirmation.Continue.Label ) {
                     $continueLabel = $Confirmation.Continue.Label | JsonMenu.Functions.ResolveContextVariables
                 }
-                elseif ( $jsonMenuContext.Settings.Confirmation.Continue.Label ) {
-                    $continueLabel = $jsonMenuContext.Settings.Confirmation.Continue.Label | JsonMenu.Functions.ResolveContextVariables
-                }
                 else {
-                    $continueLabel = $jsonMenuContext.Constants.Confirmation.Continue.Label
+                    $continueLabel = $jsonMenuContext.Settings.Confirmation.Continue.Label | JsonMenu.Functions.ResolveContextVariables
                 }
                 # help
                 if ( $Confirmation.Continue.Help ) {
                     $continueHelp = $Confirmation.Continue.Help | JsonMenu.Functions.ResolveContextVariables
                 }
-                elseif ( $jsonMenuContext.Settings.Confirmation.ContinueHelp ) {
+                else {
                     $continueHelp = $jsonMenuContext.Settings.Confirmation.Continue.Help | JsonMenu.Functions.ResolveContextVariables
-                }
-                else {
-                    $continueLabel = $jsonMenuContext.Constants.Confirmation.Continue.Help
-                }
-            }
-            elseif ( $jsonMenuContext.Settings.Confirmation.Continue ) {
-                # settings
-                # label
-                if ( $jsonMenuContext.Settings.Confirmation.Continue.Label ) {
-                    $continueLabel = $jsonMenuContext.Settings.Confirmation.Continue.Label | JsonMenu.Functions.ResolveContextVariables
-                }
-                else {
-                    $continueLabel = $jsonMenuContext.Constants.Confirmation.Continue.Label
-                }
-                # help
-                if ( $jsonMenuContext.Settings.Confirmation.Continue.Help ) {
-                    $continueHelp = $jsonMenuContext.Settings.Confirmation.Continue.Help | JsonMenu.Functions.ResolveContextVariables
-                }
-                else {
-                    $continueHelp = $jsonMenuContext.Constants.Confirmation.Continue.Help
                 }
             }
             else {
-                # constants
-                $continueLabel = $jsonMenuContext.Constants.Confirmation.Continue.Label
-                $continueHelp = $jsonMenuContext.Constants.Confirmation.Continue.Help
+                # defaults
+                $continueLabel = $jsonMenuContext.Settings.Confirmation.Continue.Label | JsonMenu.Functions.ResolveContextVariables
+                $continueHelp = $jsonMenuContext.Settings.Confirmation.Continue.Help | JsonMenu.Functions.ResolveContextVariables
             }
 
             # Get cancel label and help
@@ -106,43 +80,20 @@ function JsonMenu.UserInteraction.WriteConfirmation {
                 if ( $Confirmation.Cancel.Label ) {
                     $cancelLabel = $Confirmation.Cancel.Label | JsonMenu.Functions.ResolveContextVariables
                 }
-                elseif ( $jsonMenuContext.Settings.Confirmation.Cancel.Label ) {
-                    $cancelLabel = $jsonMenuContext.Settings.Confirmation.Cancel.Label | JsonMenu.Functions.ResolveContextVariables
-                }
                 else {
-                    $cancelLabel = $jsonMenuContext.Constants.Confirmation.Cancel.Label
+                    $cancelLabel = $jsonMenuContext.Settings.Confirmation.Cancel.Label | JsonMenu.Functions.ResolveContextVariables
                 }
                 # help
                 if ( $Confirmation.Cancel.Help ) {
                     $cancelHelp = $Confirmation.Cancel.Help | JsonMenu.Functions.ResolveContextVariables
                 }
-                elseif ( $jsonMenuContext.Settings.Confirmation.Cancel.Help ) {
+                else {
                     $cancelHelp = $jsonMenuContext.Settings.Confirmation.Cancel.Help | JsonMenu.Functions.ResolveContextVariables
-                }
-                else {
-                    $cancelHelp = $jsonMenuContext.Constants.Confirmation.Cancel.Help
-                }
-            }
-            elseif ( $jsonMenuContext.Settings.Confirmation.Cancel ) {
-                # settings
-                # label
-                if ( $jsonMenuContext.Settings.Confirmation.Cancel.Label ) {
-                    $cancelLabel = $jsonMenuContext.Settings.Confirmation.Cancel.Label | JsonMenu.Functions.ResolveContextVariables
-                }
-                else {
-                    $cancelLabel = $jsonMenuContext.Constants.Confirmation.Cancel.Label
-                }
-                # help
-                if ( $jsonMenuContext.Settings.Confirmation.Cancel.Help ) {
-                    $cancelHelp = $jsonMenuContext.Settings.Confirmation.Cancel.Help | JsonMenu.Functions.ResolveContextVariables
-                }
-                else {
-                    $cancelHelp = $jsonMenuContext.Constants.Confirmation.Cancel.Help
                 }
             }
             else {
-                $cancelLabel = $jsonMenuContext.Constants.Confirmation.Cancel.Label
-                $cancelHelp = $jsonMenuContext.Constants.Confirmation.Cancel.Help
+                $cancelLabel = $jsonMenuContext.Settings.Confirmation.Cancel.Label
+                $cancelHelp = $jsonMenuContext.Settings.Confirmation.Cancel.Help
             }
 
             # setup choices
