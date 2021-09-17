@@ -120,23 +120,23 @@ function JsonMenu.Action.InvokeAction {
             try {
                 if ( $null -eq $methodParameters ) {
                     & $methodName
-                    $jsonMenuContext.ActionResults[$ActionId] = $true
-                    $jsonMenuContext.ActionContext.Success = $true
+                    $JsonMenu.Context.ActionResults[$ActionId] = $true
+                    $JsonMenu.Context.ActionContext.Success = $true
                 }
                 else {
                     & $methodName @methodParameters
-                    $jsonMenuContext.ActionResults[$ActionId] = $true
-                    $jsonMenuContext.ActionContext.Success = $true
+                    $JsonMenu.Context.ActionResults[$ActionId] = $true
+                    $JsonMenu.Context.ActionContext.Success = $true
                 }
             }
             catch {
                 Write-Error $_
-                $jsonMenuContext.ActionResults[$ActionId] = $false
-                $jsonMenuContext.ActionContext.Success = $false
+                $JsonMenu.Context.ActionResults[$ActionId] = $false
+                $JsonMenu.Context.ActionContext.Success = $false
             }
 
             $actionStopwatch.Stop()
-            $jsonMenuContext.ActionContext.Stopwatch = $actionStopwatch
+            $JsonMenu.Context.ActionContext.Stopwatch = $actionStopwatch
         }
     }
 }

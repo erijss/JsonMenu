@@ -29,24 +29,24 @@ function JsonMenu.SysTrayMenu.WriteMenu {
 
         $appContext = New-Object System.Windows.Forms.ApplicationContext
 
-        $icon = Join-Path -Path $jsonMenuContext.Constants.Settings.ModuleRoot -ChildPath "JsonMenuLogo.ico"
+        $icon = Join-Path -Path $JsonMenu.Constants.Settings.ModuleRoot -ChildPath "JsonMenuLogo.ico"
         $sysTrayMenu = New-Object System.Windows.Forms.NotifyIcon
-        $sysTrayMenu.Text = $jsonMenuContext.Menus[$MenuId].Id
+        $sysTrayMenu.Text = $JsonMenu.Context.Menus[$MenuId].Id
         $sysTrayMenu.Icon = $icon
         $sysTrayMenu.Visible = $true
 
-        $menuOptions = $jsonMenuContext.Menus[$MenuId].Options
+        $menuOptions = $JsonMenu.Context.Menus[$MenuId].Options
         $contextMenu = New-Object System.Windows.Forms.ContextMenu
         $contextMenu = JsonMenu.SysTrayMenu.WriteOptions -Container $contextMenu -Options $menuOptions
 
         $sysTrayMenu.ContextMenu = $contextMenu
 
         # try {
-        #     $jsonMenuContext.Constants.Settings.ConsoleIsMinimizable = $true
-        #     $jsonMenuContext.Constants.Settings.ConsoleIsMinimizable = JsonMenu.SysTrayMenu.HideConsole
+        #     $JsonMenu.Constants.Settings.ConsoleIsMinimizable = $true
+        #     $JsonMenu.Constants.Settings.ConsoleIsMinimizable = JsonMenu.SysTrayMenu.HideConsole
         # }
         # catch {
-        #     $jsonMenuContext.Constants.Settings.ConsoleIsMinimizable = $false
+        #     $JsonMenu.Constants.Settings.ConsoleIsMinimizable = $false
         #     # $sysTrayMenu.Visible = $false
         # }
 

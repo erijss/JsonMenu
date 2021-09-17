@@ -38,17 +38,17 @@ function JsonMenu.Action.WriteAction {
     )
     process {
         # get action from Json menu data
-        $action = $jsonMenuContext.Actions[$ActionId]
+        $action = $JsonMenu.Context.Actions[$ActionId]
 
         if (($null -ne $action) -or ($ActionId -eq "")) {
             # we have a valid action to proceed
 
             # clear action result from previous attempt
-            if ( $jsonMenuContext.ActionResults.ContainsKey($ActionId) ) {
-                $jsonMenuContext.ActionResults[$ActionId] = $false
+            if ( $JsonMenu.Context.ActionResults.ContainsKey($ActionId) ) {
+                $JsonMenu.Context.ActionResults[$ActionId] = $false
             }
             else {
-                $jsonMenuContext.ActionResults[$ActionId] = $false
+                $JsonMenu.Context.ActionResults[$ActionId] = $false
             }
 
             # create action context object
@@ -56,10 +56,10 @@ function JsonMenu.Action.WriteAction {
                 $ActionName = $action.Name
             }
 
-            $jsonMenuContext.ActionContext = @{}
-            $jsonMenuContext.ActionContext.Id = $ActionId
-            $jsonMenuContext.ActionContext.Name = $ActionName
-            $jsonMenuContext.ActionContext.Success = $false
+            $JsonMenu.Context.ActionContext = @{}
+            $JsonMenu.Context.ActionContext.Id = $ActionId
+            $JsonMenu.Context.ActionContext.Name = $ActionName
+            $JsonMenu.Context.ActionContext.Success = $false
 
             # Ensure we can continue if there is no action begin
             $continue = $true

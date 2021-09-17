@@ -15,15 +15,15 @@ function JsonMenu.SysTrayMenu.WriteOptions {
 
         foreach ($option in $Options) {
             switch ( $option.type ) {
-                $jsonMenuContext.Constants.Menu.MenuType {
+                $JsonMenu.Constants.Menu.MenuType {
                     $menuItem = New-Object System.Windows.Forms.MenuItem
                     $menuItem.Text = $option.Value
-                    $menuOptions = $jsonMenuContext.Menus[$option.Action].Options
+                    $menuOptions = $JsonMenu.Context.Menus[$option.Action].Options
                     $menuItem = JsonMenu.SysTrayMenu.WriteOptions -Container $menuItem -Options $menuOptions
                     $Container.MenuItems.AddRange($menuItem)
                     break
                 }
-                $jsonMenuContext.Constants.Menu.ActionType {
+                $JsonMenu.Constants.Menu.ActionType {
                     $menuItem = New-Object System.Windows.Forms.MenuItem
                     $menuItem.Text = $option.Value
                     $menuItem.Name = $option.action
@@ -33,7 +33,7 @@ function JsonMenu.SysTrayMenu.WriteOptions {
                     $Container.MenuItems.AddRange($menuItem)
                     break
                 }
-                $jsonMenuContext.Constants.Menu.ExitType {
+                $JsonMenu.Constants.Menu.ExitType {
                     $menuItem = New-Object System.Windows.Forms.MenuItem
                     $menuItem.Text = $option.Value
                     $menuItem.Add_Click( {

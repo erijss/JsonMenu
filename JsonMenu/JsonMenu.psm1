@@ -43,16 +43,20 @@ $jsonMenuManifest = Test-ModuleManifest -Path $jsonMenuManifestPath -WarningActi
 
 # JsonMenuContext
 $script:JsonMenu = @{}
-$script:JsonMenu.Context = @{}
 
-$jsonMenuContext.Constants = @{
-    Info = @{
-        Version = $jsonMenuManifest.Version.ToString()
-        Created = 2021
-        ShowLogo = 3
-        ModulePath = $jsonMenuModulePath
-        ConsoleIsMinimizable = $true
-    }
+$JsonMenu.Info = @{
+    Version = $jsonMenuManifest.Version.ToString()
+    Created = 2021
+    ShowLogo = 3
+    ModulePath = $jsonMenuModulePath
+    ConsoleIsMinimizable = $true
+}
+
+# holds the loaded configuration
+$JsonMenu.Configuration = @{}
+
+# constants used in code
+$JsonMenu.Constants = @{
     Properties = @{
         Settings = "settings"
         Menus = "menus"
@@ -67,7 +71,10 @@ $jsonMenuContext.Constants = @{
     }
 }
 
-$jsonMenuContext.Settings = @{
+# Holds the context of the loaded menu
+$JsonMenu.Context = @{}
+
+$JsonMenu.Context.Settings = @{
     MenuType = "Console"
     StartAction = ""
     StartMenu = "main"
@@ -93,14 +100,13 @@ $jsonMenuContext.Settings = @{
         }
     }
 }
-$jsonMenuContext.Configuration = @{}
-$jsonMenuContext.Menus = @{}
-$jsonMenuContext.Actions = @{}
-$jsonMenuContext.Texts = @{}
-$jsonMenuContext.Repositories = @{}
-$jsonMenuContext.Modules = @{}
-$jsonMenuContext.Scripts  =@{}
-$jsonMenuContext.ActionContext = @{}
-$jsonMenuContext.ActionResults = @{}
+$JsonMenu.Context.Menus = @{}
+$JsonMenu.Context.Actions = @{}
+$JsonMenu.Context.Texts = @{}
+$JsonMenu.Context.Repositories = @{}
+$JsonMenu.Context.Modules = @{}
+$JsonMenu.Context.Scripts  =@{}
+$JsonMenu.Context.ActionContext = @{}
+$JsonMenu.Context.ActionResults = @{}
 
 Export-ModuleMember -function Invoke-JSonMenu

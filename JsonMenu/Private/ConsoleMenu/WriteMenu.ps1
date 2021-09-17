@@ -55,7 +55,7 @@ function JsonMenu.ConsoleMenu.WriteMenu {
     )
 
     begin {
-        $menu = $jsonMenuContext.Menus[$MenuId]
+        $menu = $JsonMenu.Context.Menus[$MenuId]
         $selection = $null
         $actionType = $null
         $actionId = $null
@@ -100,6 +100,6 @@ function JsonMenu.ConsoleMenu.WriteMenu {
                     }
                 }
             }
-        } until ( $actionType -eq $jsonMenuContext.Constants.Menu.ExitType )
+        } until ( $actionType -eq $JsonMenu.Constants.Menu.ExitType )
     }
 }

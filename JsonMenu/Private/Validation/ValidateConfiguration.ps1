@@ -1,34 +1,34 @@
 function JsonMenu.Validation.ValidateConfiguration {
 
-    $jsonMenuContext.Settings = $jsonMenuContext.Constants
+    $JsonMenu.Context.Settings = $JsonMenu.Constants
 
-    if ( $jsonMenuContext.Configuration.Settings ) {
-        # $jsonMenuContext.Settings = $jsonMenuContext.Configuration.Settings
+    if ( $JsonMenu.Configuration.Settings ) {
+        # $JsonMenu.Context.Settings = $JsonMenu.Configuration.Settings
         # for easy access add menus as hashtable with the id as key
-        foreach ( $setting in $jsonMenuContext.Configuration.Settings.PSObject.Properties )
+        foreach ( $setting in $JsonMenu.Configuration.Settings.PSObject.Properties )
         {
-            $jsonMenuContext.Settings[$setting.Name] = $setting.Value
+            $JsonMenu.Context.Settings[$setting.Name] = $setting.Value
         }
     }
-    if ( $jsonMenuContext.Configuration.Menus ) {
+    if ( $JsonMenu.Configuration.Menus ) {
         # for easy access add menus as hashtable with the id as key
-        foreach ( $menu in $jsonMenuContext.Configuration.Menus )
+        foreach ( $menu in $JsonMenu.Configuration.Menus )
         {
-            $jsonMenuContext.Menus[$menu.id] = $menu
+            $JsonMenu.Context.Menus[$menu.id] = $menu
         }
     }
-    if ( $jsonMenuContext.Configuration.Actions ) {
+    if ( $JsonMenu.Configuration.Actions ) {
         # for easy access add actions as hashtable with the id as key
-        foreach ( $action in $jsonMenuContext.Configuration.Actions )
+        foreach ( $action in $JsonMenu.Configuration.Actions )
         {
-            $jsonMenuContext.Actions[$action.id] =$action
+            $JsonMenu.Context.Actions[$action.id] =$action
         }
     }
-    if ( $jsonMenuContext.Configuration.Texts ) {
+    if ( $JsonMenu.Configuration.Texts ) {
         # for easy access add texts as hashtable with the id as key
-        foreach ( $textt in $jsonMenuContext.Configuration.Texts )
+        foreach ( $textt in $JsonMenu.Configuration.Texts )
         {
-            $jsonMenuContext.Texts[$text.id] = $text
+            $JsonMenu.Context.Texts[$text.id] = $text
         }
     }
 }

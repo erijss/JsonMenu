@@ -26,7 +26,7 @@ function Invoke-JsonMenu {
             HelpMessage = "The JsonMenu input object.")]
         [ValidateNotNullOrEmpty()]
         [PSCustomObject]
-        $JsonMenu,
+        $Object,
 
         # Specifies a path to one or more locations. Wildcards are permitted.
         [Parameter(
@@ -62,7 +62,7 @@ function Invoke-JsonMenu {
         switch ( $PSCmdLet.ParameterSetName ) {
             "Path" {
                 try {
-                    $jsonMenuContext.Configuration = Get-Content -Path $Path  -Force -Raw | ConvertFrom-Json
+                    $JsonMenu.Configuration = Get-Content -Path $Path  -Force -Raw | ConvertFrom-Json
                    break
                 }
                 catch {
@@ -71,7 +71,7 @@ function Invoke-JsonMenu {
             }
             "Json" {
                 try {
-                    $jsonMenuContext.Configuration = $Json | ConvertFrom-Json
+                    $JsonMenu.Configuration = $Json | ConvertFrom-Json
                     break
                 }
                 catch {
@@ -80,7 +80,7 @@ function Invoke-JsonMenu {
             }
             "Object" {
                 try {
-                    $jsonMenuContext.Configuration = $JsonMenu
+                    $JsonMenu.Configuration = $Object
                     break
                 }
                 catch {
@@ -96,17 +96,17 @@ function Invoke-JsonMenu {
         JsonMenu.UserInteraction.WriteLogo
 
         $menuType = "Console"
-        if ( $jsonMenuContext.Settings.MenuType ) {
-           $menuType = $jsonMenuContext.Settings.MenuType
+        if ( $JsonMenu.Context.Settings.MenuType ) {
+           $menuType = $JsonMenu.Context.Settings.MenuType
         } else {
-            $menuType = $jsonMenuContext.Constants.Settings.MenuType
+            $menuType = $JsonMenu.Constants.Settings.MenuType
         }
 
-        if ( $jsonMenuContext.Settings.StartMenu ) {
-            $startMenu = $jsonMenuContext.Settings.StartMenu
+        if ( $JsonMenu.Context.Settings.StartMenu ) {
+            $startMenu = $JsonMenu.Context.Settings.StartMenu
         }
         else {
-            $startMenu = $jsonMenuContext.Constants.Settings.StartMenu
+            $startMenu = $JsonMenu.Constants.Settings.StartMenu
         }
 
         if ( $menuType.ToLower() -eq "systray" -or $AsSysTrayMenu){

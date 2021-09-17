@@ -43,12 +43,12 @@ function JsonMenu.ConsoleMenu.InvokeOption {
     process {
         switch ($ActionType) {
             # write menu
-            $jsonMenuContext.Constants.Menu.MenuType {
+            $JsonMenu.Constants.Menu.MenuType {
                 JsonMenu.ConsoleMenu.WriteMenu -MenuId $ActionId
                 break
              }
             #  write action
-             $jsonMenuContext.Constants.Menu.ActionType {
+             $JsonMenu.Constants.Menu.ActionType {
                 JsonMenu.Action.WriteAction -ActionId $ActionId -ActionName $ActionName
                 break
             }

@@ -1,6 +1,6 @@
 {
 	"settings": {
-		"NoLogo": true,
+		"noLogo": false,
 		"startAction": "",
 		"startMenu": "MainMenu",
 		"menuType": "console",
@@ -31,8 +31,8 @@
 			"cls": true,
 			"header": [
 				"This is the main menu",
-				"The main menu has $($jsonMenuContext.Menus.MainMenu.Options.Length) options",
-				"The option '$($jsonMenuContext.Menus.MainMenu.Options[3].Value)' does not work",
+				"The main menu has $($JsonMenu.Context.Menus.MainMenu.Options.Length) options",
+				"The option '$($JsonMenu.Context.Menus.MainMenu.Options[3].Value)' does not work",
 				"========================================================"
 			],
 			"options": [
@@ -145,7 +145,7 @@
 			},
 			"end": {
 				"cls": false,
-				"header": "Action '$($jsonMenuContext.ActionContext.Name)' is finished",
+				"header": "Action '$($JsonMenu.Context.ActionContext.Name)' is finished",
 				"selection": {
 					"prompt": "Press any key to continue",
 					"anykey": true
@@ -176,8 +176,8 @@
 				"cls": false,
 				"header": [
 					"=============================== Summary ====================================",
-					"{ if ( $jsonMenuContext.ActionContext.Success ) { Write-Output 'The action is succesfully executed' } else { Write-Output 'The action failed' } }",
-					"It took $([math]::Round($jsonMenuContext.ActionContext.Stopwatch.Elapsed.TotalSeconds)) seconds to execute the action '$($jsonMenuContext.ActionContext.Name)'",
+					"{ if ( $JsonMenu.Context.ActionContext.Success ) { Write-Output 'The action is succesfully executed' } else { Write-Output 'The action failed' } }",
+					"It took $([math]::Round($JsonMenu.Context.ActionContext.Stopwatch.Elapsed.TotalSeconds)) seconds to execute the action '$($JsonMenu.Context.ActionContext.Name)'",
 					"=============================================================================="
 				],
 				"selection": {
@@ -191,7 +191,7 @@
 			"invoke": {
 				"cls": true,
 				"method": {
-					"name": "$($jsonMenuContext.Constants.Settings.ModulePath)\\Demo\\DemoScript.ps1",
+					"name": "$($JsonMenu.Info.ModulePath)\\Demo\\DemoScript.ps1",
 					"parameters": {
 						"Name": "Jane Doe"
 					}
@@ -201,8 +201,8 @@
 				"cls": false,
 				"header": [
 					"=============================== Summary ====================================",
-					"{ if ( $jsonMenuContext.ActionContext.Success ) { Write-Output 'The action is succesfully executed' } else { Write-Output 'The action failed' } }",
-					"It took $([math]::Round($jsonMenuContext.ActionContext.Stopwatch.Elapsed.TotalSeconds)) seconds to execute the action '$($jsonMenuContext.ActionContext.Name)'",
+					"{ if ( $JsonMenu.Context.ActionContext.Success ) { Write-Output 'The action is succesfully executed' } else { Write-Output 'The action failed' } }",
+					"It took $([math]::Round($JsonMenu.Context.ActionContext.Stopwatch.Elapsed.TotalSeconds)) seconds to execute the action '$($JsonMenu.Context.ActionContext.Name)'",
 					"=============================================================================="
 				],
 				"selection": {
@@ -216,7 +216,7 @@
 			"invoke": {
 				"cls": true,
 				"module": {
-					"name": "$($jsonMenuContext.Constants.Settings.ModulePath)\\Demo\\DemoScriptWithFunction.ps1"
+					"name": "$($JsonMenu.Info.ModulePath)\\Demo\\DemoScriptWithFunction.ps1"
 				},
 				"method": {
 					"name": "Write-HelloMoon",
@@ -227,7 +227,7 @@
 			},
 			"end": {
 				"cls": false,
-				"header": "Action $($jsonMenuContext.ActionContext.Name) is finished",
+				"header": "Action $($JsonMenu.Context.ActionContext.Name) is finished",
 				"selection": {
 					"anykey": true
 				}

@@ -59,13 +59,13 @@ function JsonMenu.ConsoleMenu.WriteOptions {
     process {
 
         # get pattern or default fallback
-        $optionPattern = $jsonMenuContext.Settings.Option.Pattern
+        $optionPattern = $JsonMenu.Context.Settings.Option.Pattern
 
         # get padLeft value and convert to integer
-        $optionPadLeft = [convert]::ToInt32($jsonMenuContext.Settings.Option.PadLeft)
+        $optionPadLeft = [convert]::ToInt32($JsonMenu.Context.Settings.Option.PadLeft)
 
         # get padRight value and convert to integer
-        $optionPadRight = [convert]::ToInt32($jsonMenuContext.Settings.Option.PadRight)
+        $optionPadRight = [convert]::ToInt32($JsonMenu.Context.Settings.Option.PadRight)
 
         # write options with pattern and padding
         foreach ( $option in $Options ) {
