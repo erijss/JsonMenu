@@ -44,20 +44,9 @@ function JsonMenu.UserInteraction.WriteHeader {
                 Write-Output " "
             }
 
-            # $Header = $Header | JsonMenu.Functions.ResolveContextVariables
+            # $Header = $Header | JsonMenu.Functions.Expand
             foreach ($line in $Header) {
-                if ( $line.StartsWith("{") -and $line.EndsWith("}") ) {
-                    # remove brackets
-                    $line = $line.Substring(1,$line.Length -2)
-                    # convert to scriptblock
-                    $scriptBlock = [ScriptBlock]::Create($line)
-                    # execute scriptblock
-                    & $scriptBlock
-                }
-                else {
-                    $line = $line | JsonMenu.Functions.ResolveContextVariables
-                    Write-Output $line
-                }
+                Write-Output $line | JsonMenu.Functions.Expand
             }
 
             if ( $AddLineBreakAfter ) {

@@ -43,10 +43,10 @@ function JsonMenu.UserInteraction.WriteConfirmation {
         if ( $Confirmation ) {
             # Get question value
             if ( $Confirmation.Question ) {
-                $question = $Confirmation.Question | JsonMenu.Functions.ResolveContextVariables
+                $question = $Confirmation.Question | JsonMenu.Functions.Expand
             }
             else {
-                $question = $JsonMenu.Context.Settings.Confirmation.Question | JsonMenu.Functions.ResolveContextVariables
+                $question = $JsonMenu.Context.Settings.Confirmation.Question | JsonMenu.Functions.Expand
             }
 
             # Get confirmation label and help
@@ -54,23 +54,23 @@ function JsonMenu.UserInteraction.WriteConfirmation {
                 # defined inline
                 # label
                 if ( $Confirmation.Continue.Label ) {
-                    $continueLabel = $Confirmation.Continue.Label | JsonMenu.Functions.ResolveContextVariables
+                    $continueLabel = $Confirmation.Continue.Label | JsonMenu.Functions.Expand
                 }
                 else {
-                    $continueLabel = $JsonMenu.Context.Settings.Confirmation.Continue.Label | JsonMenu.Functions.ResolveContextVariables
+                    $continueLabel = $JsonMenu.Context.Settings.Confirmation.Continue.Label | JsonMenu.Functions.Expand
                 }
                 # help
                 if ( $Confirmation.Continue.Help ) {
-                    $continueHelp = $Confirmation.Continue.Help | JsonMenu.Functions.ResolveContextVariables
+                    $continueHelp = $Confirmation.Continue.Help | JsonMenu.Functions.Expand
                 }
                 else {
-                    $continueHelp = $JsonMenu.Context.Settings.Confirmation.Continue.Help | JsonMenu.Functions.ResolveContextVariables
+                    $continueHelp = $JsonMenu.Context.Settings.Confirmation.Continue.Help | JsonMenu.Functions.Expand
                 }
             }
             else {
                 # defaults
-                $continueLabel = $JsonMenu.Context.Settings.Confirmation.Continue.Label | JsonMenu.Functions.ResolveContextVariables
-                $continueHelp = $JsonMenu.Context.Settings.Confirmation.Continue.Help | JsonMenu.Functions.ResolveContextVariables
+                $continueLabel = $JsonMenu.Context.Settings.Confirmation.Continue.Label | JsonMenu.Functions.Expand
+                $continueHelp = $JsonMenu.Context.Settings.Confirmation.Continue.Help | JsonMenu.Functions.Expand
             }
 
             # Get cancel label and help
@@ -78,17 +78,17 @@ function JsonMenu.UserInteraction.WriteConfirmation {
                 # defined inline
                 # label
                 if ( $Confirmation.Cancel.Label ) {
-                    $cancelLabel = $Confirmation.Cancel.Label | JsonMenu.Functions.ResolveContextVariables
+                    $cancelLabel = $Confirmation.Cancel.Label | JsonMenu.Functions.Expand
                 }
                 else {
-                    $cancelLabel = $JsonMenu.Context.Settings.Confirmation.Cancel.Label | JsonMenu.Functions.ResolveContextVariables
+                    $cancelLabel = $JsonMenu.Context.Settings.Confirmation.Cancel.Label | JsonMenu.Functions.Expand
                 }
                 # help
                 if ( $Confirmation.Cancel.Help ) {
-                    $cancelHelp = $Confirmation.Cancel.Help | JsonMenu.Functions.ResolveContextVariables
+                    $cancelHelp = $Confirmation.Cancel.Help | JsonMenu.Functions.Expand
                 }
                 else {
-                    $cancelHelp = $JsonMenu.Context.Settings.Confirmation.Cancel.Help | JsonMenu.Functions.ResolveContextVariables
+                    $cancelHelp = $JsonMenu.Context.Settings.Confirmation.Cancel.Help | JsonMenu.Functions.Expand
                 }
             }
             else {

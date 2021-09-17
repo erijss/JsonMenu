@@ -30,10 +30,10 @@ function JsonMenu.UserInteraction.WriteSelection {
     process {
         if ( -not $Selection.AnyKey -and $JsonMenu.Info.ConsoleIsMinimizable ) {
             if ( $Selection.Prompt ) {
-                $prompt = $Selection.Prompt | JsonMenu.Functions.ResolveContextVariables
+                $prompt = $Selection.Prompt | JsonMenu.Functions.Expand
             }
             else {
-                $prompt =  $JsonMenu.Context.Settings.Selection.PromptForChoice | JsonMenu.Functions.ResolveContextVariables
+                $prompt =  $JsonMenu.Context.Settings.Selection.PromptForChoice | JsonMenu.Functions.Expand
             }
 
             if ( $AddLineBreakBefore ) {
@@ -44,10 +44,10 @@ function JsonMenu.UserInteraction.WriteSelection {
         }
         elseif ( $JsonMenu.Info.ConsoleIsMinimizable ) {
             if ( $Selection.Prompt ) {
-                $prompt = $Selection.Prompt | JsonMenu.Functions.ResolveContextVariables
+                $prompt = $Selection.Prompt | JsonMenu.Functions.Expand
             }
             else {
-                $prompt = $JsonMenu.Context.Settings.Selection.PromptForAnyKey | JsonMenu.Functions.ResolveContextVariables
+                $prompt = $JsonMenu.Context.Settings.Selection.PromptForAnyKey | JsonMenu.Functions.Expand
             }
 
             if ( $AddLineBreakBefore ) {

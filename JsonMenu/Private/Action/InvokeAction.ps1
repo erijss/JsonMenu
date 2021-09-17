@@ -82,13 +82,13 @@ function JsonMenu.Action.InvokeAction {
 
         # moduule
         if ( $Invoke.Module ) {
-            $moduleName = $Invoke.Module.Name| JsonMenu.Functions.ResolveContextVariables
+            $moduleName = $Invoke.Module.Name| JsonMenu.Functions.Expand
 
             # resolve context variable and convert to hashtable
             $moduleParameters = @{}
             foreach ($parameter in $Invoke.Method.Parameters.PSObject.Properties)
             {
-                $value = $parameter.Value | JsonMenu.Functions.ResolveContextVariables
+                $value = $parameter.Value | JsonMenu.Functions.Expand
                 $moduleParameters.Add($parameter.Name, $value)
             }
 
@@ -103,13 +103,13 @@ function JsonMenu.Action.InvokeAction {
 
         # function
         if ( $Invoke.Method) {
-            $methodName = $Invoke.Method.Name | JsonMenu.Functions.ResolveContextVariables
+            $methodName = $Invoke.Method.Name | JsonMenu.Functions.Expand
 
             # resolve context variable and convert to hashtable
             $methodParameters = @{}
             foreach ($parameter in $Invoke.Method.Parameters.PSObject.Properties)
             {
-                $value = $parameter.Value | JsonMenu.Functions.ResolveContextVariables
+                $value = $parameter.Value | JsonMenu.Functions.Expand
                 $methodParameters.Add($parameter.Name, $value)
             }
 

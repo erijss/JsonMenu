@@ -69,8 +69,9 @@ function JsonMenu.ConsoleMenu.WriteOptions {
 
         # write options with pattern and padding
         foreach ( $OptionContext in $Options ) {
-            $option = $($optionPattern -f $OptionContext.Id.PadLeft($optionPadLeft).PadRight($optionPadRight), $OptionContext.Value)
-            Write-Output  $option | JsonMenu.Functions.ResolveContextVariables
+            $optionValue =  $OptionContext.Value | JsonMenu.Functions.Expand
+            $option = $($optionPattern -f $OptionContext.Id.PadLeft($optionPadLeft).PadRight($optionPadRight), $optionValue)
+            Write-Output  $option
         }
     }
 }
