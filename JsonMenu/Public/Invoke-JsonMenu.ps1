@@ -57,7 +57,7 @@ function Invoke-JsonMenu {
         $AsSysTrayMenu
     )
     begin {
-        Clear-Host
+        JsonMenu.UserInteraction.ClearHost -Cls $true
 
         switch ( $PSCmdLet.ParameterSetName ) {
             "Path" {
@@ -95,19 +95,13 @@ function Invoke-JsonMenu {
     process {
         JsonMenu.UserInteraction.WriteLogo
 
-        $menuType = "Console"
-        if ( $JsonMenu.Context.Settings.MenuType ) {
-           $menuType = $JsonMenu.Context.Settings.MenuType
-        } else {
-            $menuType = $JsonMenu.Constants.Settings.MenuType
+        # if there is a start action, execute that first
+        if ( $JsonMenu.Context.Settings.StartAction ) {
+            JsonMenu.Action.WriteAction($JsonMenu.Context.Settings.StartAction)
         }
 
-        if ( $JsonMenu.Context.Settings.StartMenu ) {
-            $startMenu = $JsonMenu.Context.Settings.StartMenu
-        }
-        else {
-            $startMenu = $JsonMenu.Constants.Settings.StartMenu
-        }
+        $menuType = $JsonMenu.Context.Settings.MenuType
+        $startMenu = $JsonMenu.Context.Settings.StartMenu
 
         if ( $menuType.ToLower() -eq "systray" -or $AsSysTrayMenu){
             JsonMenu.SysTrayMenu.WriteMenu -MenuId $startMenu

@@ -69,6 +69,7 @@ $JsonMenu.Constants = @{
         ExitType = "exit"
         ActionType = "action"
     }
+
 }
 
 # Holds the context of the loaded menu

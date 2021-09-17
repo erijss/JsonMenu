@@ -46,8 +46,8 @@ function JsonMenu.Functions.Expand {
             $script = $InputObject.Substring(1,$InputObject.Length -2)
             # convert to scriptblock
             $scriptBlock = [ScriptBlock]::Create($script)
-            # execute scriptblock
-            & $scriptBlock
+            # execute scriptblock in current scope
+            . $scriptBlock
         }
         else {
             $ExecutionContext.InvokeCommand.ExpandString($InputObject)

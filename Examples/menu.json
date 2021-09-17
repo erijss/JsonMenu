@@ -1,5 +1,6 @@
 {
 	"settings": {
+		"noLogo": true,
 		"startAction": "",
 		"startMenu": "MainMenu",
 		"menuType": "console",
@@ -22,6 +23,10 @@
 		"selection": {
 			"promptForChoice": "Select an option",
 			"promptForAnykey": "Type any key to continue"
+		},
+		"action": {
+			"errorAction": "Continue",
+			"postActionErrorSummary": true
 		}
 	},
 	"menus": [

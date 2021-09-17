@@ -75,7 +75,7 @@ function JsonMenu.Action.WriteAction {
             if ( $continue -eq $true ) {
                 # invoke action
                 if ( $ActionContext.Invoke ) {
-                    JsonMenu.Action.InvokeAction -Invoke $ActionContext.Invoke -ActionId $ActionId
+                    JsonMenu.Action.InvokeAction -Invoke $ActionContext.Invoke
                 }
 
                 # write action end
