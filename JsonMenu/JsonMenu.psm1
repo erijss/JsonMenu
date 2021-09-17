@@ -1,4 +1,4 @@
-# JsonMenu
+ # JsonMenu
 # Copyright (c) 2021 Erwin Rijss
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -42,13 +42,16 @@ $jsonMenuManifestPath = Join-Path $jsonMenuModulePath "JsonMenu.psd1"
 $jsonMenuManifest = Test-ModuleManifest -Path $jsonMenuManifestPath -WarningAction SilentlyContinue
 
 # JsonMenuContext
-$script:jsonMenuContext = @{}
+$script:JsonMenu = @{}
+$script:JsonMenu.Context = @{}
 
 $jsonMenuContext.Constants = @{
     Info = @{
         Version = $jsonMenuManifest.Version.ToString()
         Created = 2021
         ShowLogo = 3
+        ModulePath = $jsonMenuModulePath
+        ConsoleIsMinimizable = $true
     }
     Properties = @{
         Settings = "settings"
@@ -62,6 +65,13 @@ $jsonMenuContext.Constants = @{
         ExitType = "exit"
         ActionType = "action"
     }
+}
+
+$jsonMenuContext.Settings = @{
+    MenuType = "Console"
+    StartAction = ""
+    StartMenu = "main"
+    NoLogo = $false
     Option = @{
         Pattern = "{0}: {1}"
         PadLeft = 0
@@ -79,28 +89,17 @@ $jsonMenuContext.Constants = @{
         }
         Cancel = @{
             Label = "&No"
-            Help = "Go back to the menu"
+            Help = "Cancel this action and go back to the menu"
         }
-        ContinueLabel = "&Yes"
-        ContinueHelp = "Type 'Y' to continue"
-        CancelLabel = "&No"
-        CancelHelp = "Type 'N' to go back to the menu"
-    }
-    Settings = @{
-        MenuType = "Console"
-        StartMenu = "main"
-        ModulePath = $jsonMenuModulePath
-        ConsoleIsMinimizable = $true
     }
 }
-$jsonMenuContext.Settings = @{}
 $jsonMenuContext.Configuration = @{}
 $jsonMenuContext.Menus = @{}
 $jsonMenuContext.Actions = @{}
+$jsonMenuContext.Texts = @{}
 $jsonMenuContext.Repositories = @{}
 $jsonMenuContext.Modules = @{}
 $jsonMenuContext.Scripts  =@{}
-$jsonMenuContext.Texts = @{}
 $jsonMenuContext.ActionContext = @{}
 $jsonMenuContext.ActionResults = @{}
 
