@@ -121,31 +121,25 @@
 			"id": "load-module-execute-method",
 			"begin": {
 				"cls": true,
-				"header": "Write Color",
-				"confirmation" : {
-					"question": "Do you want to continue?",
-					"continue": {
-						"label": "&Yes",
-						"help": "Click 'Y' to continue"
-					},
-					"cancel": {
-						"label": "&No",
-						"help": "Click 'N' to cancel"
-					}
-				}
+				"header": [
+					"Example of the Write-Color method from the PSWriteColor module",
+					"=============================================================="
+				]
 			},
 			"invoke": {
-				"cls": true,
+				"cls": false,
 				"module": {
-					"name": "PSWriteColor",
-					"parameters": {}
+					"path": "D:\\Repository\\PSWriteColor\\0.87.3\\PSWriteColor.psm1",
+					"parameters": [
+						"Force"
+					]
 				},
 				"method": {
 					"name": "Write-Color",
-					"parameters": {
-						"Text": ["Green", "Yellow", "Red"],
-						"Color": ["Red","Green","Yellow"]
-					}
+					"parameters": [
+						{ "Text": ["This text ", "is written in ", "different colors."] },
+						{ "Color": ["Red", "Green", "Yellow"] }
+					]
 				}
 			},
 			"end": {
@@ -160,21 +154,22 @@
 		{
 			"id": "execute-local-method",
 			"begin": {
+				"header": [
+					"Example of a local method from the module itself",
+					"================================================",
+					" "
+				],
 				"confirmation" : {},
 				"cls": true
 			},
 			"invoke": {
-				"cls": true,
+				"cls": false,
 				"method": {
 					"name": "JsonMenu.UserInteraction.WriteHeader",
-					"parameters": {
-						"Header": [
-							"Hello",
-							"World",
-							"How are you today?"
-						],
-						"AddLinebreakBefore": true
-					}
+					"parameters": [
+						{ "Header": [ "Hello", "World", "How are you today?" ] },
+						{ "AddLinebreakBefore": true }
+					]
 				}
 			},
 			"end": {
@@ -195,11 +190,11 @@
 			"name": "executing a script method from a file",
 			"invoke": {
 				"cls": true,
-				"method": {
-					"name": "$($JsonMenu.Info.ModulePath)\\Demo\\DemoScript.ps1",
-					"parameters": {
-						"Name": "Jane Doe"
-					}
+				"script": {
+					"path": "$($JsonMenu.Info.ModulePath)\\Demo\\DemoScript.ps1",
+					"parameters": [
+						{ "Name": "Jane Doe" }
+					]
 				}
 			},
 			"end": {
@@ -221,14 +216,14 @@
 			"name": "",
 			"invoke": {
 				"cls": true,
-				"module": {
-					"name": "$($JsonMenu.Info.ModulePath)\\Demo\\DemoScriptWithFunction.ps1"
+				"script": {
+					"path": "$($JsonMenu.Info.ModulePath)\\Demo\\DemoScriptWithFunction.ps1"
 				},
 				"method": {
 					"name": "Write-HelloMoon",
-					"parameters": {
-						"Name": "Jane Doe"
-					}
+					"parameters": [
+						{ "Name": "Jane Doe" }
+					]
 				}
 			},
 			"end": {

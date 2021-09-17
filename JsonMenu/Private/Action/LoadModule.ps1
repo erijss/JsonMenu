@@ -15,18 +15,24 @@ function JsonMenu.Action.LoadModule {
     )
     process {
         $moduleName = $Module.Name | JsonMenu.Functions.Expand
+        $modulePath = $Module.Path | JsonMenu.Functions.Expand
+
+        if ( $moduleName ) {
+            $moduleToLoad = $moduleName
+        }
+        elseif ( $modulePath ) {
+            $moduleToLoad = $modulePath
+        }
 
         if ( $Module.Parameters ) {
             $moduleParameters = $Module.Parameters | JsonMenu.Action.SplatParameters
         }
 
         if ( $null -eq $moduleParameters ) {
-            # Import-Module -Name $moduleName -Force
-            . $moduleName
+            Import-Module -Name $moduleToLoad
         }
         else {
-            # Import-Module -Name $moduleName @moduleParameters -Force
-            . $moduleName
+            Import-Module -Name $moduleToLoad @moduleParameters
         }
     }
 }

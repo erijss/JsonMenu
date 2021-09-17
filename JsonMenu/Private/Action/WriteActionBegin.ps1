@@ -46,17 +46,6 @@ function JsonMenu.Action.WriteActionStart {
                 }
                 JsonMenu.UserInteraction.WriteHeader @headerOptions
             }
-
-            if ( $Begin.Confirmation ) {
-                $confirmationOptions = @{
-                    Confirmation = $Begin.Confirmation
-                    AddLineBreakBefore =  ($Begin.Header) -or (-not $Begin.Cls)
-                }
-                return JsonMenu.UserInteraction.WriteConfirmation @confirmationOptions
-            }
-            else {
-                return $true
-            }
         }
     }
 }

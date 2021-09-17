@@ -69,7 +69,16 @@ function JsonMenu.Action.WriteAction {
 
             # write action begin, catch result as valdiation to continue or not
             if ( $ActionContext.Begin ) {
-                $continue = JsonMenu.Action.WriteActionStart -Begin $ActionContext.Begin
+                JsonMenu.Action.WriteActionStart -Begin $ActionContext.Begin
+
+                # confirmation separtyly otherwise header is not displayed due to Write-Output
+                if ( $ActionContext.Begin.Confirmation ) {
+                    $confirmationOptions = @{
+                        Confirmation = $ActionContext.Begin.Confirmation
+                        AddLineBreakBefore =  ($ActionContext.Begin.Header) -or (-not $ActionContext.Begin.Cls)
+                    }
+                    $continue =  JsonMenu.UserInteraction.WriteConfirmation @confirmationOptions
+                }
             }
 
             if ( $continue -eq $true ) {

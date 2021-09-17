@@ -13,21 +13,31 @@ function JsonMenu.Action.SplatParameters {
         [PSObject]
         $Parameters
     )
+    begin {
+        $splattedParameters = @{}
+    }
     process {
-        if ( $Parameters ) {
-            $splattedParameters = @{}
-
-            foreach ($parameter in $Parameters.PSObject.Properties)
-            {
-                $value = $parameter.Value #| JsonMenu.Functionss.Expand
-                # expanding on parameters is disabled because
-                # $True becomes True for Boolean values
-                # Is there really a need for this. Maybe a little bit overdone
-
-                $splattedParameters.Add($parameter.Name, $value)
+        foreach ($parameter in $Parameters)
+        {
+            # expanding on parameters is disabled because
+            # $True becomes True for Boolean values
+            # Is there really a need for this. Maybe a little bit overdone
+            if ( $parameter -is [string] ) {
+                $name = $parameter
+                $value = $null
+            }
+            else {
+                $name = $parameter.PSObject.Properties.Name
+                $value = $parameter.PSObject.Properties.Value
             }
 
-            return $splattedParameters
+            $splattedParameters.Add($name, $value)
+
+
         }
+
+    }
+    end {
+        return $splattedParameters
     }
 }

@@ -47,25 +47,27 @@ function JsonMenu.Action.InvokeAction {
         $actionContextStopwatch = [System.Diagnostics.Stopwatch]::StartNew()
         $actionContextStopwatch.Start()
 
-        if ( $Invoke.Module ) {
-            $moduleName = $Invoke.Module.Name| JsonMenu.Functions.Expand
+        if ( $Invoke.Script ) {
+            # When loading a script with functions, it has to be loaded in the same
+            # function as the invocation of the method in the script. This code cannot
+            # be moved ina separate function, otherwise it will not work
 
-            if ( $Invoke.Module.Parameters ) {
-                $moduleParameters = $Invoke.Module.Parameters | JsonMenu.Action.SplatParameters
+            $scriptPath = $Invoke.Script.Path| JsonMenu.Functions.Expand
+
+            if ( $Invoke.Script.Parameters ) {
+                $scriptParameters = $Invoke.Script.Parameters | JsonMenu.Action.SplatParameters
             }
 
-            if ( $null -eq $moduleParameters ) {
-                Import-Module -Name $moduleName -Force
+            if ( $null -eq $scriptParameters ) {
+                . $scriptPath
             }
             else {
-                Import-Module -Name $moduleName @moduleParameters -Force
+                . $scriptPath @scriptParameters
             }
+        }
 
-            # JsonMenu.Action.LoadModule -Module $Invoke.Module
-            # The function JsonMenu.Action.LoadModule contains exact the same code
-            # as this if block. However, if the module is loaded in a separate function,
-            # the method is not recognized.
-            # "inline loading" does work, though. Why?
+        if ( $Invoke.Module ) {
+            JsonMenu.Action.LoadModule -Module $Invoke.Module
         }
 
         if ( $Invoke.Method) {
