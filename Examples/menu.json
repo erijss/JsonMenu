@@ -1,6 +1,5 @@
 {
 	"settings": {
-		"noLogo": true,
 		"startAction": "",
 		"startMenu": "MainMenu",
 		"menuType": "console",
@@ -10,24 +9,25 @@
 			"padRight": 0
 		},
 		"confirmation": {
-			"question": "Do we continue?",
+			"question": "Do you like to continue?",
 			"continue": {
-				"label": "&Ok, if you insist",
-				"help": "Click 'O' to continue"
+				"label": "&Yes",
+				"help": "Type 'Y' to continue"
 			},
 			"cancel": {
-				"label": "&Mwaahhhhh",
-				"help": "Click 'M' to cancel"
+				"label": "&No",
+				"help": "Type 'N' to not continue"
 			}
 		},
 		"selection": {
-			"promptForChoice": "Place your bets",
-			"promptForAnykey": "keep pushing"
+			"promptForChoice": "Select an option",
+			"promptForAnykey": "Type any key to continue"
 		}
 	},
 	"menus": [
 		{
 			"id": "MainMenu",
+			"name": "The main menu containing all the options to start with",
 			"cls": true,
 			"header": [
 				"This is the main menu with id $($MenuContext.Id)",
@@ -38,13 +38,13 @@
 			"options": [
 				{
 					"id": "1",
-					"value": "Submenu (type $($OptionContext.Id)) to select",
+					"value": "Submenu (type $($OptionContext.Id) to select)",
 					"type": "menu",
 					"action": "menu1"
 				},
 				{
 					"id": "2",
-					"value": "execute script method",
+					"value": "execute script",
 					"type": "action",
 					"action": "execute-script-method"
 				},
