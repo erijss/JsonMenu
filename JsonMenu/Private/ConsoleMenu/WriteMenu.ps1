@@ -55,7 +55,7 @@ function JsonMenu.ConsoleMenu.WriteMenu {
     )
 
     begin {
-        $menu = $JsonMenu.Context.Menus[$MenuId]
+        $MenuContext = $JsonMenu.Context.Menus[$MenuId]
         $selection = $null
         $actionType = $null
         $actionId = $null
@@ -73,25 +73,25 @@ function JsonMenu.ConsoleMenu.WriteMenu {
             $actionId = $null
 
             # clear host
-            JsonMenu.UserInteraction.ClearHost -Cls $menu.Cls
+            JsonMenu.UserInteraction.ClearHost -Cls $MenuContext.Cls
 
             # write header
             $headerOptions = @{
-                Header = $menu.Header
-                AddLineBreakBefore = (-not $menu.Cls)
+                Header = $MenuContext.Header
+                AddLineBreakBefore = (-not $MenuContext.Cls)
                 AddLineBreakAfter = $true
             }
             JsonMenu.UserInteraction.WriteHeader @headerOptions
 
             #write options
-            JsonMenu.ConsoleMenu.WriteOptions -Options $menu.Options
+            JsonMenu.ConsoleMenu.WriteOptions -Options $MenuContext.Options
 
             # write selection and wait for user input
-            $selection = JsonMenu.UserInteraction.WriteSelection -Selection $menu.Selection -AddLineBreakBefore $true
+            $selection = JsonMenu.UserInteraction.WriteSelection -Selection $MenuContext.Selection -AddLineBreakBefore $true
 
             # validate userinput against current menu
             if ( ($selection -ne -1) -and $selection -ne "" ) {
-                foreach ( $option in $menu.Options ) {
+                foreach ( $option in $MenuContext.Options ) {
                     if ($option.id -eq $selection) {
                         $actionType = $option.type
                         $actionId = $option.action

@@ -106,7 +106,5 @@ $JsonMenu.Context.Texts = @{}
 $JsonMenu.Context.Repositories = @{}
 $JsonMenu.Context.Modules = @{}
 $JsonMenu.Context.Scripts  =@{}
-$JsonMenu.Context.ActionContext = @{}
-$JsonMenu.Context.ActionResults = @{}
 
 Export-ModuleMember -function Invoke-JSonMenu
