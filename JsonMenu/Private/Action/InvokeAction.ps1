@@ -29,6 +29,7 @@ function JsonMenu.Action.InvokeAction {
         none
     .NOTES
     #>
+    [CmdletBinding()]
     param (
         [Parameter()]
         [PSObject]
@@ -60,7 +61,7 @@ function JsonMenu.Action.InvokeAction {
 
             try {
                 if ( $null -eq $scriptParameters ) {
-                    . $scriptPath | JsonMenu.Action.WriteActionResult
+                    . $scriptPath
                     $ActionContext.Success = $true
                 }
                 else {
@@ -83,6 +84,6 @@ function JsonMenu.Action.InvokeAction {
         }
 
         $actionContextStopwatch.Stop()
-        $ActionContext.Stopwatch = $actionStopwatch
+        $ActionContext.Stopwatch = $actionContextStopwatch
     }
 }

@@ -10,15 +10,15 @@ function JsonMenu.SysTrayMenu.InvokeOption {
 
     process {
 
-        # if ( $JsonMenu.Constants.Settings.ConsoleIsMinimizable -eq $true ) {
-        #     JsonMenu.SysTrayMenu.ShowConsole
-        # }
+        if ( $JsonMenu.Info.ConsoleIsMinimizable -eq $true ) {
+            JsonMenu.SysTrayMenu.ShowConsole
+        }
 
         JsonMenu.Action.WriteAction -ActionId $ActionId
 
-        # if ( $JsonMenu.Constants.Settings.ConsoleIsMinimizable -eq $true ) {
-        #     JsonMenu.SysTrayMenu.HideConsole
-        # }
+        if ( $JsonMenu.Info.ConsoleIsMinimizable -eq $true ) {
+            JsonMenu.SysTrayMenu.HideConsole
+        }
     }
 
 }

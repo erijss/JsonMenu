@@ -8,6 +8,7 @@ function JsonMenu.Action.LoadModule {
     .OUTPUTS
     .NOTES
     #>
+    [CmdletBinding()]
     param (
         [Parameter()]
         [PSObject]

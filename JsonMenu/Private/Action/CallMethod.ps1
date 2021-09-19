@@ -8,6 +8,7 @@ function JsonMenu.Action.CallMethod {
     .OUTPUTS
     .NOTES
     #>
+    [CmdletBinding()]
     param (
         [Parameter()]
         [PSObject]

@@ -25,6 +25,7 @@ function JsonMenu.Action.WriteActionEnd {
     .NOTES
         none
     #>
+    [CmdletBinding()]
     param (
         [Parameter()]
         [PSObject]

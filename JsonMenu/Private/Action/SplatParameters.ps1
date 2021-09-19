@@ -8,6 +8,7 @@ function JsonMenu.Action.SplatParameters {
     .OUTPUTS
     .NOTES
     #>
+    [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
         [PSObject]

@@ -28,6 +28,7 @@ function JsonMenu.Action.WriteAction {
     .NOTES
         none
     #>
+    [CmdletBinding()]
     param (
         [Parameter()]
         [String]

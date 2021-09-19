@@ -176,7 +176,7 @@
 				"cls": false,
 				"header": [
 					"=============================== Summary ====================================",
-					"{ if ( $ActionContext.Success ) { Write-Output 'The action is succesfully executed' } else { Write-Output 'The action failed' } }",
+					"{ if ( $ActionContext.Success ) { Write-Host 'The action is succesfully executed' } else { Write-Host 'The action failed' } }",
 					"It took $([math]::Round($ActionContext.Stopwatch.Elapsed.TotalSeconds)) seconds to execute the action '$($ActionContext.Name)'",
 					"=============================================================================="
 				],
@@ -201,8 +201,9 @@
 				"cls": false,
 				"header": [
 					"=============================== Summary ====================================",
-					"{ if ( $ActionContext.Success ) { Write-Output 'The action is succesfully executed' } else { Write-Output 'The action failed' } }",
+					"{ if ( $ActionContext.Success ) { Write-Host 'The action is succesfully executed' } else { Write-Host 'The action failed' } }",
 					"It took $([math]::Round($ActionContext.Stopwatch.Elapsed.TotalSeconds)) seconds to execute the action '$($ActionContext.Name)'",
+					"The action gave back as result $($ActionResult)",
 					"=============================================================================="
 				],
 				"selection": {

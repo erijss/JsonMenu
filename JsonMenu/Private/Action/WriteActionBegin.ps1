@@ -25,6 +25,7 @@ function JsonMenu.Action.WriteActionStart {
     .NOTES
         none
     #>
+    [CmdletBinding()]
     param (
         [Parameter()]
         [PSObject]
@@ -46,6 +47,12 @@ function JsonMenu.Action.WriteActionStart {
                 }
                 JsonMenu.UserInteraction.WriteHeader @headerOptions
             }
+
+            if ($Begin.Confirmation) {
+                return JsonMenu.UserInterAction.WriteConfirmation -Confirmation $Begin.Confirmation
+            }
         }
+
+        return $true
     }
 }
