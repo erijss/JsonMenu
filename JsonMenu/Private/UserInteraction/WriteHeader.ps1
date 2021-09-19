@@ -41,16 +41,17 @@ function JsonMenu.UserInteraction.WriteHeader {
     process {
         if ( $Header ) {
             if ( $AddLineBreakBefore ) {
-                Write-Output " "
+                Write-Host " "
             }
 
             # $Header = $Header | JsonMenu.Functions.Expand
             foreach ($line in $Header) {
-                Write-Output $line | JsonMenu.Functions.Expand
+                $line = $line | JsonMenu.Functions.Expand
+                Write-Host $line
             }
 
             if ( $AddLineBreakAfter ) {
-                Write-Output " "
+                Write-Host " "
             }
         }
     }

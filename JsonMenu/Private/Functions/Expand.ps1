@@ -20,7 +20,7 @@ function JsonMenu.Functions.Expand {
 
         $wisdom = $json | Convert-FromJson
 
-        Write-Output $wisdom.WhatAWiseManOnceSaid | JsonMenu.Functions.Expand
+        Write-Host $wisdom.WhatAWiseManOnceSaid | JsonMenu.Functions.Expand
     .INPUTS
         [PSCustomObject]    $strubg
     .OUTPUTS

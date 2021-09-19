@@ -103,7 +103,7 @@ function JsonMenu.UserInteraction.WriteConfirmation {
 
             # handle linebreak
             if ( $AddLineBreakBefore ) {
-                Write-Output " "
+                Write-Host " "
             }
 
             # prompt for choice and wait for user input

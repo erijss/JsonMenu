@@ -58,7 +58,7 @@ function JsonMenu.UserInteraction.WriteSelection {
                 $null = Read-Host -Prompt $prompt
             }
             else {
-                Write-Output $prompt
+                Write-Host $prompt
                 $null = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyDown")
             }
         }

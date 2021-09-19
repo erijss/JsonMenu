@@ -41,7 +41,7 @@ function JsonMenu.Action.InvokeAction {
             JsonMenu.UserInteraction.ClearHost -Cls $Invoke.Cls
         }
         else {
-            Write-Output " "
+            Write-Host " "
         }
 
         $actionContextStopwatch = [System.Diagnostics.Stopwatch]::StartNew()
@@ -52,17 +52,25 @@ function JsonMenu.Action.InvokeAction {
             # function as the invocation of the method in the script. This code cannot
             # be moved ina separate function, otherwise it will not work
 
-            $scriptPath = $Invoke.Script.Path| JsonMenu.Functions.Expand
+            $scriptPath = $Invoke.Script.Path | JsonMenu.Functions.Expand
 
             if ( $Invoke.Script.Parameters ) {
                 $scriptParameters = $Invoke.Script.Parameters | JsonMenu.Action.SplatParameters
             }
 
-            if ( $null -eq $scriptParameters ) {
-                . $scriptPath
+            try {
+                if ( $null -eq $scriptParameters ) {
+                    . $scriptPath | JsonMenu.Action.WriteActionResult
+                    $ActionContext.Success = $true
+                }
+                else {
+                    . $scriptPath @scriptParameters #| JsonMenu.Action.WriteActionResult
+                    $ActionContext.Success = $true
+                }
             }
-            else {
-                . $scriptPath @scriptParameters
+            catch {
+                JsonMenu.UserInteraction.WriteError -RaisedError $_
+                $ActionContext.Success = $false
             }
         }
 

@@ -71,7 +71,7 @@ function JsonMenu.ConsoleMenu.WriteOptions {
         foreach ( $OptionContext in $Options ) {
             $optionValue =  $OptionContext.Value | JsonMenu.Functions.Expand
             $option = $($optionPattern -f $OptionContext.Id.PadLeft($optionPadLeft).PadRight($optionPadRight), $optionValue)
-            Write-Output  $option
+            Write-Host  $option
         }
     }
 }
