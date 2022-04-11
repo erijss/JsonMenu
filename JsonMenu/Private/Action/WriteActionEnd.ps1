@@ -43,9 +43,9 @@ function JsonMenu.Action.WriteActionEnd {
             # write header
             if ( $End.Header ) {
                 $headerOptions = @{
-                    Header = $End.Header
+                    Header             = $End.Header
                     AddLineBreakBefore = (-not $End.Cls)
-                    AddLineBreakAfter = $false
+                    AddLineBreakAfter  = $false
                 }
                 JsonMenu.UserInteraction.WriteHeader @headerOptions
             }
@@ -53,7 +53,7 @@ function JsonMenu.Action.WriteActionEnd {
             # write selection
             if ( $End.Selection ) {
                 $selectionOptions = @{
-                    Selection = $End.Selection
+                    Selection          = $End.Selection
                     AddLineBreakBefore = ($End.Header) -or (-not $End.Cls)
                 }
                 JsonMenu.UserInteraction.WriteSelection @selectionOptions

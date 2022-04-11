@@ -8,13 +8,13 @@ function JsonMenu.Action.LoadModule {
     .OUTPUTS
     .NOTES
     #>
-    [CmdletBinding()]
     param (
         [Parameter()]
         [PSObject]
         $Module
     )
     process {
+
         $moduleName = $Module.Name | JsonMenu.Functions.Expand
         $modulePath = $Module.Path | JsonMenu.Functions.Expand
 

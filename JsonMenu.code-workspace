@@ -23,7 +23,6 @@
 				"request": "launch",
 				"cwd": "${workspaceRoot}"
 			}
-
 		]
 	}
 }

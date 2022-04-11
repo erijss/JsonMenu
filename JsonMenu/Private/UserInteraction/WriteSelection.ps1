@@ -33,7 +33,7 @@ function JsonMenu.UserInteraction.WriteSelection {
                 $prompt = $Selection.Prompt | JsonMenu.Functions.Expand
             }
             else {
-                $prompt =  $JsonMenu.Context.Settings.Selection.PromptForChoice | JsonMenu.Functions.Expand
+                $prompt = $JsonMenu.Context.Settings.Selection.PromptForChoice | JsonMenu.Functions.Expand
             }
 
             if ( $AddLineBreakBefore ) {

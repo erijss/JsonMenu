@@ -1,24 +1,24 @@
 function JsonMenu.SysTrayMenu.InvokeOption {
-    <#
+  <#
     .SYNOPSIS
     .DESCRIPTION
     #>
-    param (
-        [String]
-        $ActionId
-    )
+  param (
+    [String]
+    $ActionId
+  )
 
-    process {
+  process {
 
-        if ( $JsonMenu.Info.ConsoleIsMinimizable -eq $true ) {
-            JsonMenu.SysTrayMenu.ShowConsole
-        }
-
-        JsonMenu.Action.WriteAction -ActionId $ActionId
-
-        if ( $JsonMenu.Info.ConsoleIsMinimizable -eq $true ) {
-            JsonMenu.SysTrayMenu.HideConsole
-        }
+    if ( $JsonMenu.Info.ConsoleIsMinimizable -eq $true ) {
+      JsonMenu.SysTrayMenu.ShowConsole
     }
+
+    JsonMenu.Action.WriteAction -ActionId $ActionId
+
+    if ( $JsonMenu.Info.ConsoleIsMinimizable -eq $true ) {
+      JsonMenu.SysTrayMenu.HideConsole
+    }
+  }
 
 }

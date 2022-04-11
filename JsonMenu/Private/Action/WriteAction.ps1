@@ -88,7 +88,7 @@ function JsonMenu.Action.WriteAction {
             $JsonMenu.Context.Actions[$ActionId] = $ActionContext
         }
         else {
-           #Not a valid action, so return
+            #Not a valid action, so return
         }
     }
 }

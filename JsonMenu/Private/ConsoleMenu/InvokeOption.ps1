@@ -46,9 +46,9 @@ function JsonMenu.ConsoleMenu.InvokeOption {
             $JsonMenu.Constants.Menu.MenuType {
                 JsonMenu.ConsoleMenu.WriteMenu -MenuId $ActionId
                 break
-             }
+            }
             #  write action
-             $JsonMenu.Constants.Menu.ActionType {
+            $JsonMenu.Constants.Menu.ActionType {
                 JsonMenu.Action.WriteAction -ActionId $ActionId -ActionName $ActionName
                 break
             }

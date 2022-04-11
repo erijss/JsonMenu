@@ -1,8 +1,8 @@
 function JsonMenu.Action.WriteActionResult {
     [CmdletBinding()]
     param (
-        [Parameter(ValueFromPipeline)]
-        [TypeName]
+        [Parameter(ValueFromPipelineByPropertyName)]
+        [PSCustomObject]
         $InputObject
     )
     process {

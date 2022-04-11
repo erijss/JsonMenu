@@ -36,7 +36,6 @@ function JsonMenu.Action.InvokeAction {
         $Invoke
     )
     process {
-
         # clear host otherwise add a new line
         if ( $Invoke.Cls ) {
             JsonMenu.UserInteraction.ClearHost -Cls $Invoke.Cls
@@ -65,7 +64,7 @@ function JsonMenu.Action.InvokeAction {
                     $ActionContext.Success = $true
                 }
                 else {
-                    . $scriptPath @scriptParameters #| JsonMenu.Action.WriteActionResult
+                    . $scriptPath @scriptParameters
                     $ActionContext.Success = $true
                 }
             }

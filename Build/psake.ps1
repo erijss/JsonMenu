@@ -2,11 +2,10 @@
 # Init some things
 Properties {
     # Find the build folder based on build system
-        $ProjectRoot = $ENV:BHProjectPath
-        if(-not $ProjectRoot)
-        {
-            $ProjectRoot = Resolve-Path "$PSScriptRoot\.."
-        }
+    $ProjectRoot = $ENV:BHProjectPath
+    if (-not $ProjectRoot) {
+        $ProjectRoot = Resolve-Path "$PSScriptRoot\.."
+    }
 
     $Timestamp = Get-Date -UFormat "%Y%m%d-%H%M%S"
     $PSVersion = $PSVersionTable.PSVersion.Major
@@ -14,9 +13,8 @@ Properties {
     $lines = '----------------------------------------------------------------------'
 
     $Verbose = @{}
-    if($ENV:BHCommitMessage -match "!verbose")
-    {
-        $Verbose = @{Verbose = $True}
+    if ($ENV:BHCommitMessage -match "!verbose") {
+        $Verbose = @{Verbose = $True }
     }
 }
 
@@ -54,7 +52,7 @@ Task Init {
     "`n"
 }
 
-Task Test -Depends Init  {
+Task Test -Depends Init {
     $lines
     "`n`tSTATUS: Testing with PowerShell $PSVersion"
 
@@ -67,8 +65,7 @@ Task Test -Depends Init  {
     [Net.ServicePointManager]::SecurityProtocol = $SecurityProtocol
 
     # In Appveyor?  Upload our tests! #Abstract this into a function?
-    If($ENV:BHBuildSystem -eq 'AppVeyor')
-    {
+    If ($ENV:BHBuildSystem -eq 'AppVeyor') {
         (New-Object 'System.Net.WebClient').UploadFile(
             "https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)",
             "$ProjectRoot\$TestFile" )
@@ -77,8 +74,7 @@ Task Test -Depends Init  {
     Remove-Item "$ProjectRoot\$TestFile" -Force -ErrorAction SilentlyContinue
     # Failed tests?
     # Need to tell psake or it will proceed to the deployment. Danger!
-    if($TestResults.FailedCount -gt 0)
-    {
+    if ($TestResults.FailedCount -gt 0) {
         Write-Error "Failed '$($TestResults.FailedCount)' tests, build failed"
     }
     "`n"
@@ -91,16 +87,14 @@ Task Build -Depends Test {
     Set-ModuleFunctions
 
     # Bump the module version if we didn't already
-    Try
-    {
+    Try {
         $GalleryVersion = Get-NextNugetPackageVersion -Name $env:BHProjectName -ErrorAction Stop
         $GithubVersion = Get-MetaData -Path $env:BHPSModuleManifest -PropertyName ModuleVersion -ErrorAction Stop
-        if($GalleryVersion -ge $GithubVersion) {
+        if ($GalleryVersion -ge $GithubVersion) {
             Update-Metadata -Path $env:BHPSModuleManifest -PropertyName ModuleVersion -Value $GalleryVersion -ErrorAction stop
         }
     }
-    Catch
-    {
+    Catch {
         "Failed to update version for '$env:BHProjectName': $_.`nContinuing with existing version"
     }
 }

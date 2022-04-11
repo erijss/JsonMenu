@@ -100,7 +100,7 @@ Describe "Manifest Testing" {
     }
 }
 
-Describe "Exported Functions Testing"{
+Describe "Exported Functions Testing" {
     $ExportedFunctions = (Get-ChildItem -Path $publicFunctionsRoot -Filter *.ps1 | Select-Object -ExpandProperty Name ) -replace '\.ps1$'
     $testCase = $ExportedFunctions | Foreach-Object { @{FunctionName = $_ } }
     It "Function <FunctionName> should be in manifest" -TestCases $testCase {
@@ -161,7 +161,7 @@ Describe "Exported Aliases Testing" {
 #     $ScriptAnalyzerErrors += Invoke-ScriptAnalyzer -Path "$ModulePath\functions" @PSScriptAnalyzerSettings
 #     $ScriptAnalyzerErrors += Invoke-ScriptAnalyzer -Path "$ModulePath\internal\functions" @PSScriptAnalyzerSettings
 #     # Get a list of all internal and Exported functions
-#     $InternalFunctions = Get-ChildItem -Path "$ModulePath\internal\functions" -Filter *.ps1 | Select-Object -ExpandProperty Name
+#     $InternalFunctions= Get-ChildItem -Path "$ModulePath\internal\functions" -Filter *.ps1 | Select-Object -ExpandProperty Name
 #     $ExportedFunctions = Get-ChildItem -Path "$ModulePath\functions" -Filter *.ps1 | Select-Object -ExpandProperty Name
 #     $AllFunctions = ($InternalFunctions + $ExportedFunctions) | Sort-Object
 #     $FunctionsWithErrors = $ScriptAnalyzerErrors.ScriptName | Sort-Object -Unique

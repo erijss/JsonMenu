@@ -1,4 +1,4 @@
- # JsonMenu
+# JsonMenu
 # Copyright (c) 2021 Erwin Rijss
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -45,10 +45,10 @@ $jsonMenuManifest = Test-ModuleManifest -Path $jsonMenuManifestPath -WarningActi
 $script:JsonMenu = @{}
 
 $JsonMenu.Info = @{
-    Version = $jsonMenuManifest.Version.ToString()
-    Created = 2021
-    ShowLogo = 3
-    ModulePath = $jsonMenuModulePath
+    Version              = $jsonMenuManifest.Version.ToString()
+    Created              = 2021
+    ShowLogo             = 3
+    ModulePath           = $jsonMenuModulePath
     ConsoleIsMinimizable = $true
 }
 
@@ -59,14 +59,14 @@ $JsonMenu.Configuration = @{}
 $JsonMenu.Constants = @{
     Properties = @{
         Settings = "settings"
-        Menus = "menus"
-        Actions = "actions"
-        Texts = "texts"
+        Menus    = "menus"
+        Actions  = "actions"
+        Texts    = "texts"
     }
-    Menu = @{
-        StartMenu = "main"
-        Menutype = "menu"
-        ExitType = "exit"
+    Menu       = @{
+        StartMenu  = "main"
+        Menutype   = "menu"
+        ExitType   = "exit"
         ActionType = "action"
     }
 
@@ -76,16 +76,16 @@ $JsonMenu.Constants = @{
 $JsonMenu.Context = @{}
 
 $JsonMenu.Context.Settings = @{
-    MenuType = "Console"
-    StartAction = ""
-    StartMenu = "main"
-    NoLogo = $false
-    Option = @{
-        Pattern = "{0}: {1}"
-        PadLeft = 0
+    MenuType     = "Console"
+    StartAction  = ""
+    StartMenu    = "main"
+    NoLogo       = $false
+    Option       = @{
+        Pattern  = "{0}: {1}"
+        PadLeft  = 0
         PadRight = 0
     }
-    Selection = @{
+    Selection    = @{
         PromptForChoice = "Select an option"
         PromptForAnyKey = "Click any key to continue"
     }
@@ -93,11 +93,11 @@ $JsonMenu.Context.Settings = @{
         Question = "Do you want to continue?"
         Continue = @{
             Label = "&Yes"
-            Help = "Continue with the action"
+            Help  = "Continue with the action"
         }
-        Cancel = @{
+        Cancel   = @{
             Label = "&No"
-            Help = "Cancel this action and go back to the menu"
+            Help  = "Cancel this action and go back to the menu"
         }
     }
 }
@@ -106,6 +106,6 @@ $JsonMenu.Context.Actions = @{}
 $JsonMenu.Context.Texts = @{}
 $JsonMenu.Context.Repositories = @{}
 $JsonMenu.Context.Modules = @{}
-$JsonMenu.Context.Scripts  =@{}
+$JsonMenu.Context.Scripts = @{}
 
 Export-ModuleMember -function Invoke-JSonMenu

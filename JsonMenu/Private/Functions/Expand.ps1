@@ -36,14 +36,13 @@ function JsonMenu.Functions.Expand {
         $InputObject
     )
 
-    process
-    {
+    process {
         # return nothing if there is no input
         if ($null -eq $InputObject) { return $null }
 
         if ( $InputObject.StartsWith("{") -and $InputObject.EndsWith("}") ) {
             # remove brackets
-            $script = $InputObject.Substring(1,$InputObject.Length -2)
+            $script = $InputObject.Substring(1, $InputObject.Length - 2)
             # convert to scriptblock
             $scriptBlock = [ScriptBlock]::Create($script)
             # execute scriptblock in current scope

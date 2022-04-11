@@ -20,7 +20,7 @@ function JsonMenu.UserInteraction.WriteLogo {
         }
         else {
 
-            $line1  = " \\==== ".PadLeft(2)
+            $line1 = " \\==== ".PadLeft(2)
             $line2a = " //==== ".PadLeft(2)
             $line2b = "    JsonMenu version {0}" -f $JsonMenu.Info.Version
             $line3a = "//===== ".PadLeft(2)

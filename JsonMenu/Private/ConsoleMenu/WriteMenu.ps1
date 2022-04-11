@@ -77,9 +77,9 @@ function JsonMenu.ConsoleMenu.WriteMenu {
 
             # write header
             $headerOptions = @{
-                Header = $MenuContext.Header
+                Header             = $MenuContext.Header
                 AddLineBreakBefore = (-not $MenuContext.Cls)
-                AddLineBreakAfter = $true
+                AddLineBreakAfter  = $true
             }
             JsonMenu.UserInteraction.WriteHeader @headerOptions
 

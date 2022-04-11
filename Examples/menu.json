@@ -1,240 +1,264 @@
 {
-	"settings": {
-		"noLogo": true,
-		"startAction": "",
-		"startMenu": "MainMenu",
-		"menuType": "console",
-		"option" : {
-			"pattern": "{0}: {1}",
-			"padLeft": 2,
-			"padRight": 0
-		},
-		"confirmation": {
-			"question": "Do you like to continue?",
-			"continue": {
-				"label": "&Yes",
-				"help": "Type 'Y' to continue"
-			},
-			"cancel": {
-				"label": "&No",
-				"help": "Type 'N' to not continue"
-			}
-		},
-		"selection": {
-			"promptForChoice": "Select an option",
-			"promptForAnykey": "Type any key to continue"
-		},
-		"action": {
-			"errorAction": "Continue",
-			"postActionErrorSummary": true
-		}
-	},
-	"menus": [
-		{
-			"id": "MainMenu",
-			"name": "The main menu containing all the options to start with",
-			"cls": true,
-			"header": [
-				"This is the main menu with id $($MenuContext.Id)",
-				"The main menu has $($MenuContext.Options.Length) options",
-				"The option '$($MenuContext.Options[3].Value)' does not work",
-				"========================================================"
-			],
-			"options": [
-				{
-					"id": "1",
-					"value": "Submenu (type $($OptionContext.Id) to select)",
-					"type": "menu",
-					"action": "menu1"
-				},
-				{
-					"id": "2",
-					"value": "execute script",
-					"type": "action",
-					"action": "execute-script-method"
-				},
-				{
-					"id": "3",
-					"value": "load script, execute method",
-					"type": "action",
-					"action": "load-script-execute-method"
-				},
-				{
-					"id": "4",
-					"value": "load module, execute method",
-					"type": "action",
-					"action": "load-module-execute-method"
-				},
-				{
-					"id": "5",
-					"value": "execute local method",
-					"type": "action",
-					"action": "execute-local-method"
-				},
-				{
-					"id": "q",
-					"value": "Exit the menu",
-					"type": "exit"
-				}
-			],
-			"selection": {}
-		},
-		{
-			"cls": true,
-			"id": "menu1",
-			"header": "Submenu 1",
-			"options": [
-				{
-					"id": "11",
-					"value": "Submenu 2",
-					"type": "menu",
-					"action": "menu2"
-				},
-				{
-					"id": "b",
-					"value": "Exit the menu",
-					"type": "exit"
-				}
-			],
-			"selection": {
-				"prompt": "Make your choice. Click [b] to go back"
-			}
-		},
-		{
-			"id": "menu2",
-			"cls": true,
-			"header": [],
-			"options": [
-				{
-					"id": "b",
-					"value": "Exit the menu",
-					"type": "exit"
-				}
-			],
-			"selection": {
-				"prompt": ""
-			}
-		}
-	],
-	"actions": [
-		{
-			"id": "load-module-execute-method",
-			"begin": {
-				"cls": true,
-				"header": [
-					"Example of the Write-Color method from the PSWriteColor module",
-					"=============================================================="
-				]
-			},
-			"invoke": {
-				"cls": false,
-				"module": {
-					"path": "D:\\Repository\\PSWriteColor\\0.87.3\\PSWriteColor.psm1",
-					"parameters": [
-						"Force"
-					]
-				},
-				"method": {
-					"name": "Write-Color",
-					"parameters": [
-						{ "Text": ["This text ", "is written in ", "different colors."] },
-						{ "Color": ["Red", "Green", "Yellow"] }
-					]
-				}
-			},
-			"end": {
-				"cls": false,
-				"header": "Action '$($ActionContext.Name)' is finished",
-				"selection": {
-					"prompt": "Press any key to continue",
-					"anykey": true
-				}
-			}
-		},
-		{
-			"id": "execute-local-method",
-			"begin": {
-				"header": [
-					"Example of a local method from the module itself",
-					"================================================",
-					" "
-				],
-				"confirmation" : {},
-				"cls": true
-			},
-			"invoke": {
-				"cls": false,
-				"method": {
-					"name": "JsonMenu.UserInteraction.WriteHeader",
-					"parameters": [
-						{ "Header": [ "Hello", "World", "How are you today?" ] },
-						{ "AddLinebreakBefore": true }
-					]
-				}
-			},
-			"end": {
-				"cls": false,
-				"header": [
-					"=============================== Summary ====================================",
-					"{ if ( $ActionContext.Success ) { Write-Host 'The action is succesfully executed' } else { Write-Host 'The action failed' } }",
-					"It took $([math]::Round($ActionContext.Stopwatch.Elapsed.TotalSeconds)) seconds to execute the action '$($ActionContext.Name)'",
-					"=============================================================================="
-				],
-				"selection": {
-					"anykey": true
-				}
-			}
-		},
-		{
-			"id": "execute-script-method",
-			"name": "executing a script method from a file",
-			"invoke": {
-				"cls": true,
-				"script": {
-					"path": "$($JsonMenu.Info.ModulePath)\\Demo\\DemoScript.ps1",
-					"parameters": [
-						{ "Name": "Jane Doe" }
-					]
-				}
-			},
-			"end": {
-				"cls": false,
-				"header": [
-					"=============================== Summary ====================================",
-					"{ if ( $ActionContext.Success ) { Write-Host 'The action is succesfully executed' } else { Write-Host 'The action failed' } }",
-					"It took $([math]::Round($ActionContext.Stopwatch.Elapsed.TotalSeconds)) seconds to execute the action '$($ActionContext.Name)'",
-					"The action gave back as result $($ActionResult)",
-					"=============================================================================="
-				],
-				"selection": {
-					"prompt": "Press any key to continue",
-					"anykey": true
-				}
-			}
-		},
-		{
-			"id": "load-script-execute-method",
-			"name": "",
-			"invoke": {
-				"cls": true,
-				"script": {
-					"path": "$($JsonMenu.Info.ModulePath)\\Demo\\DemoScriptWithFunction.ps1"
-				},
-				"method": {
-					"name": "Write-HelloMoon",
-					"parameters": [
-						{ "Name": "Jane Doe" }
-					]
-				}
-			},
-			"end": {
-				"cls": false,
-				"header": "Action $($ActionContext.Name) is finished",
-				"selection": {
-					"anykey": true
-				}
-			}
-		}
-	],
-	"Texts": []
+    "settings": {
+        "noLogo": true,
+        "startAction": "",
+        "startMenu": "MainMenu",
+        "menuType": "console",
+        "option": {
+            "pattern": "{0}: {1}",
+            "padLeft": 2,
+            "padRight": 0
+        },
+        "confirmation": {
+            "question": "Do you like to continue?",
+            "continue": {
+                "label": "&Yes",
+                "help": "Type 'Y' to continue"
+            },
+            "cancel": {
+                "label": "&No",
+                "help": "Type 'N' to not continue"
+            }
+        },
+        "selection": {
+            "promptForChoice": "Select an option",
+            "promptForAnykey": "Type any key to continue"
+        },
+        "action": {
+            "errorAction": "Continue",
+            "postActionErrorSummary": true
+        }
+    },
+    "menus": [
+        {
+            "id": "MainMenu",
+            "name": "The main menu containing all the options to start with",
+            "cls": true,
+            "header": [
+                "This is the main menu with id $($MenuContext.Id)",
+                "The main menu has $($MenuContext.Options.Length) options",
+                "The option '$($MenuContext.Options[3].Value)' does not work",
+                "========================================================"
+            ],
+            "options": [
+                {
+                    "id": "1",
+                    "value": "Submenu (type $($OptionContext.Id) to select)",
+                    "type": "menu",
+                    "action": "menu1"
+                },
+                {
+                    "id": "2",
+                    "value": "execute script",
+                    "type": "action",
+                    "action": "execute-script-method"
+                },
+                {
+                    "id": "3",
+                    "value": "load script, execute method",
+                    "type": "action",
+                    "action": "load-script-execute-method"
+                },
+                {
+                    "id": "4",
+                    "value": "load module, execute method",
+                    "type": "action",
+                    "action": "load-module-execute-method"
+                },
+                {
+                    "id": "5",
+                    "value": "execute local method",
+                    "type": "action",
+                    "action": "execute-local-method"
+                },
+                {
+                    "id": "q",
+                    "value": "Exit the menu",
+                    "type": "exit"
+                }
+            ],
+            "selection": {}
+        },
+        {
+            "cls": true,
+            "id": "menu1",
+            "header": "Submenu 1",
+            "options": [
+                {
+                    "id": "11",
+                    "value": "Submenu 2",
+                    "type": "menu",
+                    "action": "menu2"
+                },
+                {
+                    "id": "b",
+                    "value": "Exit the menu",
+                    "type": "exit"
+                }
+            ],
+            "selection": {
+                "prompt": "Make your choice. Click [b] to go back"
+            }
+        },
+        {
+            "id": "menu2",
+            "cls": true,
+            "header": [],
+            "options": [
+                {
+                    "id": "b",
+                    "value": "Exit the menu",
+                    "type": "exit"
+                }
+            ],
+            "selection": {
+                "prompt": ""
+            }
+        }
+    ],
+    "actions": [
+        {
+            "id": "load-module-execute-method",
+            "begin": {
+                "cls": true,
+                "header": [
+                    "Example of the Write-Color method from the PSWriteColor module",
+                    "=============================================================="
+                ]
+            },
+            "invoke": {
+                "cls": false,
+                "module": {
+                    "path": "D:\\Repository\\PSWriteColor\\0.87.3\\PSWriteColor.psm1",
+                    "parameters": [
+                        "Force"
+                    ]
+                },
+                "method": {
+                    "name": "Write-Color",
+                    "parameters": [
+                        {
+                            "Text": [
+                                "This text ",
+                                "is written in ",
+                                "different colors."
+                            ]
+                        },
+                        {
+                            "Color": [
+                                "Red",
+                                "Green",
+                                "Yellow"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "end": {
+                "cls": false,
+                "header": "Action '$($ActionContext.Name)' is finished",
+                "selection": {
+                    "prompt": "Press any key to continue",
+                    "anykey": true
+                }
+            }
+        },
+        {
+            "id": "execute-local-method",
+            "begin": {
+                "header": [
+                    "Example of a local method from the module itself",
+                    "================================================",
+                    " "
+                ],
+                "confirmation": {},
+                "cls": true
+            },
+            "invoke": {
+                "cls": false,
+                "method": {
+                    "name": "JsonMenu.UserInteraction.WriteHeader",
+                    "parameters": [
+                        {
+                            "Header": [
+                                "Hello",
+                                "World",
+                                "How are you today?"
+                            ]
+                        },
+                        {
+                            "AddLinebreakBefore": true
+                        }
+                    ]
+                }
+            },
+            "end": {
+                "cls": false,
+                "header": [
+                    "=============================== Summary ====================================",
+                    "{ if ( $ActionContext.Success ) { Write-Host 'The action is succesfully executed' } else { Write-Host 'The action failed' } }",
+                    "It took $([math]::Round($ActionContext.Stopwatch.Elapsed.TotalSeconds)) seconds to execute the action '$($ActionContext.Name)'",
+                    "=============================================================================="
+                ],
+                "selection": {
+                    "anykey": true
+                }
+            }
+        },
+        {
+            "id": "execute-script-method",
+            "name": "executing a script method from a file",
+            "invoke": {
+                "cls": true,
+                "script": {
+                    "path": "$($JsonMenu.Info.ModulePath)\\Demo\\DemoScript.ps1",
+                    "parameters": [
+                        {
+                            "Name": "Jane Doe"
+                        }
+                    ]
+                }
+            },
+            "end": {
+                "cls": true,
+                "header": [
+                    "=============================== Summary ====================================",
+                    "{ if ( $ActionContext.Success ) { Write-Host 'The action is succesfully executed' } else { Write-Host 'The action failed' } }",
+                    "It took $([math]::Round($ActionContext.Stopwatch.Elapsed.TotalSeconds)) seconds to execute the action '$($ActionContext.Name)'",
+                    "The action gave back as result $($ActionResult)",
+                    "=============================================================================="
+                ],
+                "selection": {
+                    "prompt": "Press any key to continue",
+                    "anykey": true
+                }
+            }
+        },
+        {
+            "id": "load-script-execute-method",
+            "name": "",
+            "invoke": {
+                "cls": true,
+                "script": {
+                    "path": "$($JsonMenu.Info.ModulePath)\\Demo\\DemoScriptWithFunction.ps1"
+                },
+                "method": {
+                    "name": "Write-HelloMoon",
+                    "parameters": [
+                        {
+                            "Name": "Jane Doe"
+                        }
+                    ]
+                }
+            },
+            "end": {
+                "cls": true,
+                "header": "Action $($ActionContext.Name) is finished",
+                "selection": {
+                    "anykey": true
+                }
+            }
+        }
+    ],
+    "Texts": []
 }

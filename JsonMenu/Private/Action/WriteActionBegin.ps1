@@ -26,33 +26,32 @@ function JsonMenu.Action.WriteActionStart {
         none
     #>
     [CmdletBinding()]
+    [OutputType([Boolean])]
     param (
         [Parameter()]
         [PSObject]
         $Begin
     )
 
-    process {
-
-        if ( $Begin ) {
-            if ( $Begin.Cls ) {
-                JsonMenu.UserInteraction.ClearHost -Cls $Begin.Cls
-            }
-
-            if ( $Begin.Header ) {
-                $headerOptions = @{
-                    Header = $Begin.Header
-                    AddLineBreakBefore = (-not $Begin.Cls)
-                    AddLineBreakAfter = $false
-                }
-                JsonMenu.UserInteraction.WriteHeader @headerOptions
-            }
-
-            if ($Begin.Confirmation) {
-                return JsonMenu.UserInterAction.WriteConfirmation -Confirmation $Begin.Confirmation
-            }
+    if ( $Begin ) {
+        if ( $Begin.Cls ) {
+            JsonMenu.UserInteraction.ClearHost -Cls $Begin.Cls
         }
 
-        return $true
+        if ( $Begin.Header ) {
+            $headerOptions = @{
+                Header             = $Begin.Header
+                AddLineBreakBefore = (-not $Begin.Cls)
+                AddLineBreakAfter  = $false
+            }
+            JsonMenu.UserInteraction.WriteHeader @headerOptions
+        }
+
+        if ($Begin.Confirmation) {
+            return JsonMenu.UserInterAction.WriteConfirmation -Confirmation $Begin.Confirmation
+        }
+        else {
+            return $true
+        }
     }
 }
