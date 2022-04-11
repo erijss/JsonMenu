@@ -2,7 +2,7 @@
 param (
     [Parameter()]
     [string]
-    $Task
+    $Task = 'Default'
 )
 process {
 

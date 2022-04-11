@@ -27,11 +27,11 @@ function JsonMenu.Action.CallMethod {
 
         try {
             if ( $null -eq $methodParameters ) {
-                & $methodName
+                & $methodName -ErrorAction JsonMenu.Context.Action.ErrorAction
                 $ActionContext.Success = $true
             }
             else {
-                & $methodName @methodParameters -ErrorAction SilentlyContinue
+                & $methodName @methodParameters -ErrorAction JsonMenu.Context.Action.ErrorAction
                 $ActionContext.Success = $true
             }
         }

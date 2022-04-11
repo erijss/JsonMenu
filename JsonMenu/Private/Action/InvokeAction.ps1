@@ -60,16 +60,16 @@ function JsonMenu.Action.InvokeAction {
 
             try {
                 if ( $null -eq $scriptParameters ) {
-                    . $scriptPath
+                    . $scriptPath -ErrorAction JsonMenu.Context.Action.ErrorAction
                     $ActionContext.Success = $true
                 }
                 else {
-                    . $scriptPath @scriptParameters
+                    . $scriptPath @scriptParameters -ErrorAction JsonMenu.Context.Action.ErrorAction
                     $ActionContext.Success = $true
                 }
             }
             catch {
-                JsonMenu.UserInteraction.WriteError -RaisedError $_
+                JsonMenu.UserInteraction.WriteError -RaisedError $
                 $ActionContext.Success = $false
             }
         }
