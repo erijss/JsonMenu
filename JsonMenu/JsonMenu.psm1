@@ -100,6 +100,9 @@ $JsonMenu.Context.Settings = @{
             Help  = "Cancel this action and go back to the menu"
         }
     }
+    Action = @{
+        ErrorAction = "SilentlyContinue"
+    }
 }
 $JsonMenu.Context.Menus = @{}
 $JsonMenu.Context.Actions = @{}
