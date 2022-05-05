@@ -60,11 +60,11 @@ function JsonMenu.Action.InvokeAction {
 
             try {
                 if ( $null -eq $scriptParameters ) {
-                    . $scriptPath -ErrorAction JsonMenu.Context.Action.ErrorAction
+                    . $scriptPath -ErrorAction JsonMenu.Context.Settings.Action.ErrorAction
                     $ActionContext.Success = $true
                 }
                 else {
-                    . $scriptPath @scriptParameters -ErrorAction JsonMenu.Context.Action.ErrorAction
+                    . $scriptPath @scriptParameters -ErrorAction JsonMenu.Context.Settings.Action.ErrorAction
                     $ActionContext.Success = $true
                 }
             }
