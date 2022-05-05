@@ -55,16 +55,16 @@ function JsonMenu.Action.InvokeAction {
             $scriptPath = $Invoke.Script.Path | JsonMenu.Functions.Expand
 
             if ( $Invoke.Script.Parameters ) {
-                $scriptParameters = $Invoke.Script.Parameters | JsonMenu.Action.SplatParameters
+                $scriptParameters = JsonMenu.Action.SplatParameters -Parameters $Invoke.Script.Parameters
             }
 
             try {
                 if ( $null -eq $scriptParameters ) {
-                    . $scriptPath -ErrorAction JsonMenu.Context.Settings.Action.ErrorAction
+                    . $scriptPath -ErrorAction $JsonMenu.Context.Settings.Action.ErrorAction
                     $ActionContext.Success = $true
                 }
                 else {
-                    . $scriptPath @scriptParameters -ErrorAction JsonMenu.Context.Settings.Action.ErrorAction
+                    . $scriptPath @scriptParameters -ErrorAction $JsonMenu.Context.Settings.Action.ErrorAction
                     $ActionContext.Success = $true
                 }
             }

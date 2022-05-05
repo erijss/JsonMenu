@@ -26,7 +26,7 @@ function JsonMenu.Action.LoadModule {
         }
 
         if ( $Module.Parameters ) {
-            $moduleParameters = $Module.Parameters | JsonMenu.Action.SplatParameters
+            $moduleParameters = JsonMenu.Action.SplatParameters -Parameters $Module.Parameters
         }
 
         if ( $null -eq $moduleParameters ) {

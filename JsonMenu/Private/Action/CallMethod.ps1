@@ -19,7 +19,7 @@ function JsonMenu.Action.CallMethod {
         $methodName = $Method.Name | JsonMenu.Functions.Expand
 
         if ( $Method.Parameters ) {
-            $methodParameters = $Method.Parameters | JsonMenu.Action.SplatParameters
+            $methodParameters = JsonMenu.Action.SplatParameters -Parameters $Method.Parameters
         }
         else {
             # No parameters to process
@@ -27,11 +27,11 @@ function JsonMenu.Action.CallMethod {
 
         try {
             if ( $null -eq $methodParameters ) {
-                & $methodName -ErrorAction JsonMenu.Context.Settings.Action.ErrorAction
+                & $methodName -ErrorAction $JsonMenu.Context.Settings.Action.ErrorAction
                 $ActionContext.Success = $true
             }
             else {
-                & $methodName @methodParameters -ErrorAction JsonMenu.Context.Settings.Action.ErrorAction
+                & $methodName @methodParameters -ErrorAction $JsonMenu.Context.Settings.Action.ErrorAction
                 $ActionContext.Success = $true
             }
         }

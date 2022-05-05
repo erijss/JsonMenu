@@ -11,7 +11,6 @@ function JsonMenu.Action.SplatParameters {
     [CmdletBinding()]
     [OutputType([Hashtable])]
     param (
-        [Parameter(ValueFromPipeline)]
         [PSObject]
         $Parameters
     )
